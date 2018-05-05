@@ -1,3 +1,9 @@
 target
+*.jar
+*.war
+*.class
+
 .idea
 qizhuangsite.iml
+
+src/main/webapp/node_modules
