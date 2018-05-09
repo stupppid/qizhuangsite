@@ -1,7 +1,7 @@
 package site.qizhuang.web.domain;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -15,23 +15,15 @@ public class User {
     private int age;
     private int privilege;
 
-    private Collection<Document> document;
-//    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = { CascadeType.ALL })
-//    private Collection<Document> document;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "user_document",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "document_id", referencedColumnName ="id")})
+    private Set<Document> documentSet;
 
     public void setId(Long id) {
         this.id = id;
     }
-
-    public User(Long id, String name, boolean gender, int age) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.gender = gender;
-        this.age = age;
-
-    }
-
 
     public Long getId() {
         return id;
@@ -60,7 +52,4 @@ public class User {
     public void setAge(int age) {
         this.age = age;
     }
-
-
-
 }

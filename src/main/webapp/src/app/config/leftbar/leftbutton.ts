@@ -1,0 +1,41 @@
+export const leftbutton:any = {
+	"name":"leftButton",
+	"minColumn":8,
+	"lockImagePath":"",
+	"buttons":[
+		{
+			"id":"home",
+			"title":"我的主页",
+			"subButton":[],
+			"href":"#"
+		},
+		{
+			"id":"document",
+			"title":"我的文档",
+			"subButton":[
+				{
+					"id":"persopnalDocument",
+					"title":"个人文档",
+					"subButton":[],
+					"href":"#personalDocument"
+				}
+			],
+			"href":"#"
+		},
+		{
+			"id":"tool",
+			"title":"我的工具",
+			"subButton":[
+				{
+					"id":"date",
+					"title":"财经日历",
+					"subButton":[],
+					"href":"#personalTools"
+				}
+			],
+			"href":"#"
+		}
+	]
+}
+
+

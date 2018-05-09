@@ -1,0 +1,26 @@
+<div style="">
+	<div class="card">
+		<a href="#">
+			<img class="card-img-top" src="http://static.runoob.com/images/mix/img_avatar.png" alt="My head">
+		</a>
+		<span class="badge badge-dark" style="border-radius: 0;">奇状</span>
+	</div>
+	<div class="card">
+		<div *ngFor="let button of buttons" class="btn-group-vertical">
+			<button class="btn btn-primary" 
+				style="border-radius: 0;border-bottom:solid black 1px;" 
+				(click)="goHref(button)">
+				{{button.title}}
+			</button>
+			<div id="{{button.id}}" class="btn-group-vertical" style="width: 100%;">
+				<button *ngFor="let subbutton of button.subButton" 
+					class="btn btn-secondary" 
+					style="border-radius: 0;border-bottom:solid black 1px;"
+					id="{{subbutton.id}}" 
+					(click)="goHref(subbutton)">
+					{{subbutton.title}}
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
