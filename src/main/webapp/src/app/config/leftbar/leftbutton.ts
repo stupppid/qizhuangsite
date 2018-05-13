@@ -6,18 +6,25 @@ export const leftbutton:any = {
 		{
 			"id":"home",
 			"title":"我的主页",
+			"ifShow" : true,
+			"ifActive" : true,
+			"unActiveAlert" : "维护中",
 			"subButton":[],
 			"href":"#"
 		},
 		{
 			"id":"document",
 			"title":"我的文档",
+			"ifShow" : true,
+			"ifActive" : true,
 			"subButton":[
 				{
 					"id":"persopnalDocument",
 					"title":"个人文档",
+					"ifShow" : true,
+					"ifActive" : true,
 					"subButton":[],
-					"href":"#personalDocument"
+					"href":"personalDocument"
 				}
 			],
 			"href":"#"
@@ -25,12 +32,40 @@ export const leftbutton:any = {
 		{
 			"id":"tool",
 			"title":"我的工具",
+			"ifShow" : true,
+			"ifActive" : true,
 			"subButton":[
 				{
 					"id":"date",
 					"title":"财经日历",
+					"ifShow" : true,
+					"ifActive" : true,
 					"subButton":[],
-					"href":"#personalTools"
+					"href":"personalTools"
+				},
+				{
+					"id":"date",
+					"title":"财经日历",
+					"ifShow" : true,
+					"ifActive" : true,
+					"subButton":[],
+					"href":"personalTools"
+				},
+				{
+					"id":"date",
+					"title":"财经日历",
+					"ifShow" : true,
+					"ifActive" : true,
+					"subButton":[],
+					"href":"personalTools"
+				},
+				{
+					"id":"date",
+					"title":"财经日历",
+					"ifShow" : true,
+					"ifActive" : true,
+					"subButton":[],
+					"href":"personalTools"
 				}
 			],
 			"href":"#"

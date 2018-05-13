@@ -5,19 +5,12 @@ import { PersonalDocumentComponent } from './personal-document/personal-document
 import { PersonalToolsComponent } from './personal-tools/personal-tools.component';
 
 const routes: Routes = [
-//{
-//	path: '#',
-//  children: [
-//    { path: '#personalTools', component: PersonalToolsComponent },
-//		  { path: '#personalDocument', component: PersonalDocumentComponent },
-		 
-//  ]
-//}
-	
-  { path: 'personalTools', component: PersonalToolsComponent },
+  	{ path: 'personalTools', component: PersonalToolsComponent, children:[
+  		{ path: 'personalTools', component: PersonalToolsComponent },
+  	]},
 	{ path: 'personalDocument', component: PersonalDocumentComponent },
-	{ path: '', redirectTo: '/', pathMatch: 'full' }
-//{ path: '**', redirectTo: '/', pathMatch: 'full' }
+	{ path: '', redirectTo: '/', pathMatch: 'full' },
+	{ path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -30,6 +23,7 @@ const routes: Routes = [
   ],
   declarations: []
 })
+
 export class AppRoutingModule { 
 	
 

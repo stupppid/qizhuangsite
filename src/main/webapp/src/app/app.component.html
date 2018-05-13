@@ -1,6 +1,5 @@
-<app-navbar></app-navbar>
+<app-navbar (signInInit)="signInInit($event)" (logOutInit)="logOutInit($event)" [ifSignIn] = "ifSignIn"></app-navbar>
 <div class="row">
 	<app-leftbar class="col-3" style="padding: 0 1px;"></app-leftbar>
-	<app-panel class="col-9" style="padding: 0 1px;"></app-panel>
+	<app-panel [data] = "data" class="col-9" style="padding: 0 1px;"></app-panel>
 </div>
-<router-outlet></router-outlet>

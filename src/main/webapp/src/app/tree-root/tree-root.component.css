@@ -1,0 +1,16 @@
+.tree-node{
+	margin-left: 1em;
+}
+
+.node-text{
+	white-space:nowrap;overflow: scroll;cursor: pointer;
+	font:13px futura;
+	transition: color 0.5s;
+	-moz-transition: color 0.5s;
+	-webkit-transition: color 0.5s;
+	-o-transition:color 0.5s;
+}
+
+.node-text:hover{
+	color: limegreen;
+}

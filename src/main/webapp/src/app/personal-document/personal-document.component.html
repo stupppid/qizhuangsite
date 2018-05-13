@@ -1,3 +1,16 @@
-<div class="container" id="">
-	personaldocument
+<app-document-tree style="position: absolute;z-index:100;left: 0;top: 0;" [nodes]="nodes" (selectc)="select($event)">
+</app-document-tree>
+<div class="btn-group" style="position: absolute;height:30px;right: 15px;top: 0px;">
+	<button class="btn btn-outline-secondary" style="font-size: 12px;border-radius: 0 ;" (click)="editDoc()">编辑</button>
+	<button class="btn btn-outline-primary" style="font-size: 12px;" (click)="newDoc()">新建</button>
+	<button class="btn btn-outline-danger" style="font-size: 12px;" (click)="deleteDoc()">删除</button>
+	<button class="btn btn-outline-secondary" style="font-size: 12px;border-radius: 0;" (click)="saveDoc()">保存</button>
+</div>
+<div class="row" style="margin: 20px 0 -40px 0;height: inherit;">
+	<div class="col-6 " *ngIf="edit" id="textPanel">
+		<textarea class="form-control form-control-sm" [(ngModel)]="rawData" (input)="refreshHTML()"></textarea>
+	</div>
+	<div [class]="showDataClass +' showPanel'"
+		 id="htmlPanel" [innerHTML]="showData">
+	</div>
 </div>

@@ -1,0 +1,8 @@
+.showPanel{
+	max-width: 58em;
+	word-break:break-all;
+	width: 100%;
+	border-radius:3px ; 
+	background-color: #f5f3f2;
+	border:solid 1px #e0e0e0;
+}

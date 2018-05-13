@@ -1,26 +1,66 @@
 package site.qizhuang.web.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
+//@Table(indexes={@Index(name="isRoot",columnList="isRoot")})
 public class Document {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String objectId;
     private Date createTime;
     private Date changeTime;
-    private String type;
+    private String type;  //文件夹 ，个人文档
+    private int zindex;
+    private boolean isRoot;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
+    private Set<Document> childDocuments;
     private String title;
     private String profile;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_document",
-            joinColumns = {@JoinColumn(name = "document_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName ="id")})
+            joinColumns = {@JoinColumn(name = "document_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    @JsonBackReference
     private Set<User> userSet;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_document",
+            joinColumns = {@JoinColumn(name = "document_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    @JsonBackReference
+    private Set<User> userSet1;
+
+    public int getZindex() {
+        return zindex;
+    }
+
+    public void setZindex(int zindex) {
+        this.zindex = zindex;
+    }
+
+    public boolean isRoot() {
+        return isRoot;
+    }
+
+    public void setRoot(boolean root) {
+        isRoot = root;
+    }
+
+    public Set<Document> getChildDocuments() {
+        return childDocuments;
+    }
+
+    public void setChildDocuments(Set<Document> childDocuments) {
+        this.childDocuments = childDocuments;
+    }
 
     public Long getId() {
         return id;
@@ -85,8 +125,5 @@ public class Document {
     public void setUserSet(Set<User> userSet) {
         this.userSet = userSet;
     }
-
-
-
 
 }

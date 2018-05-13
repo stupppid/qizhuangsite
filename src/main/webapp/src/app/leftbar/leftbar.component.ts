@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Button } from '../domian/leftbutton/button';
+import { Router } from '@angular/router';
+import { Button } from '../domain/leftbutton/button';
+
 import * as $ from 'jquery';
 import * as leftbutton from '../config/leftbar/leftbutton';
 //declare var require: any;
@@ -12,8 +14,9 @@ import * as leftbutton from '../config/leftbar/leftbutton';
 export class LeftbarComponent implements OnInit {
 	
 	buttons : Button[];
-
-  constructor() { 
+	private lastButton : String;
+	
+  constructor( private router:Router ) { 
   	this.buttons = leftbutton.leftbutton.buttons;
   	let btnTemp = this.buttons;
   	$(document).ready(function(){
@@ -27,10 +30,27 @@ export class LeftbarComponent implements OnInit {
   }
   
   goHref(btn : Button){
+  	if(!btn.ifActive){
+  		alert(btn.unActiveAlert);
+  		return;
+  	}
 		if(this.ifButtonNotLast(btn)){
-			$("#" + btn.id).toggle();
+			if(this.lastButton == btn.id){
+				$("#" + this.lastButton).slideUp(200);
+				this.lastButton = "";
+				return;
+			}
+			if(this.lastButton != ""){
+				$("#" + this.lastButton).slideUp(200);
+			}
+			try{
+				$("#" + btn.id).toggle();
+				this.lastButton = btn.id;
+			}catch(e){
+				console.log(e);
+			}
 		}else{
-			location.href = btn.href.toString();
+			this.router.navigate([btn.href]);
 		}
   }
   

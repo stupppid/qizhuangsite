@@ -6,5 +6,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = '奇状';
+  ifSignIn :Boolean = false;
+  documents:any[] = [];
+  user:any = {};
+  
+  data:any = {};
+  
+  signInInit(obj:any){
+  	this.user = obj["user"];
+  	this.documents = obj["documents"];
+  	this.ifSignIn = true;
+  }
+  
+  logOutInit(obj:any){
+  	this.user = {};
+  	this.documents = [];
+  	this.ifSignIn = false;
+  	this.data = {};
+  }
 }

@@ -24,7 +24,9 @@
       ],
       "scripts": [
 	"../node_modules/jquery/dist/jquery.min.js",
-        "../node_modules/showdown/dist/showdown.min.js"
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../node_modules/showdown/dist/showdown.min.js",
+	"../node_modules/ngx-bootstrap-modal/index.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

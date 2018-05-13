@@ -1,3 +1,35 @@
 .itemheight{
 	height: 44px;
 }
+
+.banner{
+	position: absolute; 
+	height: 40px;
+	z-index:9;
+	top: 2px;
+	left: 15px;
+}
+
+.bgRound{
+	position:absolute;
+	display: block;
+	border-radius: 14px;
+	width:30px ;
+	height: 30px;
+	background-color:#343a40;
+	z-index:1;
+	top: 4px;
+	left: 17px;
+	animation:toLime 2s ease-in 0s infinite ease-in-out alternate;
+	-webkit-animation:toLime 2s 0s infinite ease-in-out alternate;
+}
+
+@keyframes toLime{
+	from{background-color:#343a40 ;}
+	to {background-color:Lime ;}
+}
+
+@-webkit-keyframes toLime{
+	from{background-color:#343a40 ;}
+	to {background-color:Lime ;}
+}

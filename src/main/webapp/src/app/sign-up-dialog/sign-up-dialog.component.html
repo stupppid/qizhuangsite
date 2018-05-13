@@ -1,0 +1,25 @@
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h4 class="modal-title">{{title}}</h4>
+			<button type="button" class="close" (click)="close()">&times;</button>
+		</div>
+		<div class="modal-body">
+			<div class="">
+				<label for="id">账号：</label>
+				<input type="text" id="id" class="form-control" required="required" placeholder="手机号码/邮箱" [(ngModel)]="id" />
+			</div>
+			<div class="">
+				<label for="password">密码：</label>
+				<input type="password" id="password" class="form-control" required="required" placeholder="英文字母和部分常用符号8-18位" [(ngModel)]="password" />
+			</div>
+			<div *ngIf="!ifSignIn()">
+				<label for="passwordEnsure">确认密码：</label>
+				<input type="password" id="passwordEnsure" class="form-control" required="required" placeholder="再次输入密码" [(ngModel)]="passwordEnsure" />
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-primary" (click)="ensure()">确定</button>
+		</div>
+	</div>
+</div>

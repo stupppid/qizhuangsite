@@ -7,19 +7,21 @@
 	</div>
 	<div class="card">
 		<div *ngFor="let button of buttons" class="btn-group-vertical">
-			<button class="btn btn-primary" 
+			<button *ngIf="button.ifShow" class="btn btn-primary" 
 				style="border-radius: 0;border-bottom:solid black 1px;" 
 				(click)="goHref(button)">
 				{{button.title}}
 			</button>
-			<div id="{{button.id}}" class="btn-group-vertical" style="width: 100%;">
-				<button *ngFor="let subbutton of button.subButton" 
-					class="btn btn-secondary" 
-					style="border-radius: 0;border-bottom:solid black 1px;"
-					id="{{subbutton.id}}" 
+			<div id="{{button.id}}" *ngIf="button.ifShow" class="btn-group-vertical" style="width: 100%;">
+				<div style="border-radius: 0;border-bottom:solid black 1px;width: 100%;" 
+					*ngFor="let subbutton of button.subButton" 
 					(click)="goHref(subbutton)">
-					{{subbutton.title}}
-				</button>
+					<button class="btn btn-secondary" 
+						*ngIf="subbutton.ifShow"
+						id="{{subbutton.id}}" >
+						{{subbutton.title}}
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>

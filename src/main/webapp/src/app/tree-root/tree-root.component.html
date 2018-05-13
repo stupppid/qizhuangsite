@@ -1,0 +1,10 @@
+<div *ngFor="let node of nodes" id="node.id" class="tree-node" >
+	<div style="display: inline-block;">
+		> <span class="node-text" (dblclick)="changeSelectedNode(node)" (keyup)="changeName(node)">
+			{{node.text}}
+		</span>
+	</div>
+	<div *ngIf="isNotLast(node) && node.showChildren">
+		<app-tree-root  [nodes]="node.children" (select)="selectc($event)" [depth]="depth + 1"></app-tree-root>
+	</div>
+</div>
