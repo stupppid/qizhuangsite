@@ -1,4 +1,7 @@
+
 import { Component } from '@angular/core';
+import { DataService } from './service/data.service';
+import { TreeNode } from './domain/tree-node/tree-node';
 
 @Component({
   selector: 'app-root',
@@ -8,21 +11,27 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = '奇状';
   ifSignIn :Boolean = false;
-  documents:any[] = [];
+  documents:TreeNode[] = [];
   user:any = {};
   
-  data:any = {};
+  constructor(private dataService:DataService){
+  	
+  }
   
   signInInit(obj:any){
   	this.user = obj["user"];
   	this.documents = obj["documents"];
   	this.ifSignIn = true;
+  	this.dataService.user = this.user;
+  	this.dataService.documents = this.documents;
+  	
   }
   
   logOutInit(obj:any){
   	this.user = {};
   	this.documents = [];
   	this.ifSignIn = false;
-  	this.data = {};
+  	this.dataService.clear();
+  	location.href = "";
   }
 }

@@ -13,7 +13,7 @@ export interface signUpModel {
 	templateUrl: './sign-up-dialog.component.html',
 	styleUrls: ['./sign-up-dialog.component.css']
 })
-export class SignUpDialogComponent extends DialogComponent < signUpModel, null > implements OnInit, signUpModel {
+export class SignUpDialogComponent extends DialogComponent < signUpModel, any > implements OnInit, signUpModel {
 		title: string;
 		type: string;
 		id: string;
@@ -90,14 +90,15 @@ export class SignUpDialogComponent extends DialogComponent < signUpModel, null >
 				mail: this.mail,
 				password: this.password
 			}).subscribe(res => {
-				if(res == null || res["errorMsg"] == null || res["errorMsg"] != "") {
+				if(res == null || res["errorMsg"] == null) {
+						this.showError("服务器错误!");
+					} else if(res["errorMsg"] != ""){
 						this.showError(res["errorMsg"].toString());
-					} else {
+					}else{
 						this.doPre(res);
 					}
 				},
 				err => {
-					console.log(err);
 					this.showError("服务认证错误,请稍后再试");
 				}
 			)
@@ -113,14 +114,15 @@ export class SignUpDialogComponent extends DialogComponent < signUpModel, null >
 				mail: this.mail,
 				password: this.password
 			}).subscribe(res => {
-					if(res == null || res["errorMsg"] == null || res["errorMsg"] != "") {
+					if(res == null || res["errorMsg"] == null ) {
+						this.showError("服务错误");
+					}else if(res["errorMsg"] != ""){
 						this.showError(res["errorMsg"].toString());
 					} else {
 						this.showSuccess(res);
 					}
 				},
 				err => {
-					console.log(err);
 					this.showError("服务认证错误,请稍后再试");
 				}
 			)
@@ -138,15 +140,15 @@ export class SignUpDialogComponent extends DialogComponent < signUpModel, null >
 
 		showError(msg: string) {
 			this.dialogService.show(<BuiltInOptions>{  
-          content: msg,  
-          icon: 'error',  
-          size: 'sm', 
-          showCancelButton: false  
-	      })  
+	          content: msg,  
+	          icon: 'error',  
+	          size: 'sm', 
+	          showCancelButton: false  
+		    })
 		}
 		
 		showSuccess(res){
-			this.close(res);
+			this.close(true);
 		}
 		
 }

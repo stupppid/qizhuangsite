@@ -6,10 +6,17 @@ import site.qizhuang.web.domain.User;
 import java.util.List;
 import java.util.Set;
 
-public class UserWithAllDto {
-    User user;
-    Set<Document> documents;
-    String errorMsg = "";
+public class UserWithAllDto extends BasicDto{
+    private User user;
+    private Set<Document> documents;
+
+    public UserWithAllDto() { }
+
+    public UserWithAllDto(String errorMsg, User user, Set<Document> documents) {
+        super(errorMsg);
+        this.user = user;
+        this.documents = documents;
+    }
 
     public User getUser() {
         return user;
@@ -25,13 +32,5 @@ public class UserWithAllDto {
 
     public void setDocuments(Set<Document> documents) {
         this.documents = documents;
-    }
-
-    public String getErrorMsg() {
-        return errorMsg;
-    }
-
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
     }
 }

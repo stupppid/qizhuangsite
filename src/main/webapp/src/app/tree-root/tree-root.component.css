@@ -9,8 +9,20 @@
 	-moz-transition: color 0.5s;
 	-webkit-transition: color 0.5s;
 	-o-transition:color 0.5s;
+	 -webkit-user-select:none; 
+	 -moz-user-select:none; 
+	 -ms-user-select:none; 
+	 user-select:none;
 }
 
 .node-text:hover{
 	color: limegreen;
+}
+
+.textBlue{
+	color:lightblue;
+}
+
+.textWhite{
+	color: white;
 }

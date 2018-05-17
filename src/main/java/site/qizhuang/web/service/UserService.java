@@ -2,7 +2,6 @@ package site.qizhuang.web.service;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -61,11 +60,11 @@ public class UserService {
             userWithAllDto.setErrorMsg("未找到该用户");
             return userWithAllDto;
         }
-        this.documentService.test(optionalUser.get());
         User user = optionalUser.get();
         Set<Document> rootDocuments = DocumentService.findRootDocumentsFromAll(user.getDocumentSet());
         userWithAllDto.setUser(user);
         userWithAllDto.setDocuments(rootDocuments);
+        userWithAllDto.setErrorMsg("");
         return userWithAllDto;
     }
 

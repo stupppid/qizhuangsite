@@ -1,7 +1,8 @@
 <div *ngFor="let node of nodes" id="node.id" class="tree-node" >
 	<div style="display: inline-block;">
-		> <span class="node-text" (dblclick)="changeSelectedNode(node)" (keyup)="changeName(node)">
-			{{node.text}}
+		<span class="node-text" [style.color]="colorDependOnType(node.type)"
+			(dblclick)="changeSelectedNode(node)" (keyup)="changeName(node)">
+			> {{node.text}}
 		</span>
 	</div>
 	<div *ngIf="isNotLast(node) && node.showChildren">

@@ -1,11 +1,12 @@
-declare var require: any;
-
 import { Component, OnInit,Input } from '@angular/core';
 import { TreeNode } from '../domain/tree-node/tree-node';
 import * as $ from 'jquery';
 import { FormsModule } from '@angular/forms';
 import { DialogService} from "ngx-bootstrap-modal";
 import { NewFileDialogComponent } from '../new-file-dialog/new-file-dialog.component'
+import { DataService } from '../service/data.service';
+import { DocumentService } from '../service/document.service';
+declare var require: any;
 
 @Component({
 	selector: 'app-personal-document',
@@ -22,63 +23,13 @@ export class PersonalDocumentComponent implements OnInit {
 	converter: any;
 	showDataClass: String;
 	height: number;
-	@Input() data:any;
-	constructor(public dialogService: DialogService) {}
-	show() {
-		this.dialogService.addDialog(NewFileDialogComponent, {
-			title: '新建文件',
-			message: '新建文件',
-			nodes: this.nodes
-		}).subscribe((path) => {
-			console.log(path);
-		});
-	}
+	
+	constructor(private dialogService: DialogService,
+		private dataService:DataService,
+		private documentService:DocumentService ) {}
 
 	ngOnInit() {
-		this.nodes = [{
-				id: "p1",
-				objectId: "",
-				text: "Parent 1",
-				showChildren: true,
-				children: [{
-						id: "c1",
-						text: "Child 1",
-						showChildren: false,
-						objectId: "",
-						children: [{
-								id: "g1",
-								text: "孙子 1",
-								showChildren: true,
-								objectId: "",
-								children: null
-							},
-							{
-								id: "g2",
-								text: "Grandchild 2",
-								showChildren: true,
-								objectId: "",
-								children: null
-							}
-						]
-					},
-					{
-						id: "c2",
-						text: "Child 2",
-						showChildren: true,
-						objectId: "",
-						children: null
-					}
-				]
-			},
-			{
-				id: "p2",
-				text: "Parent 2",
-				showChildren: false,
-				objectId: "",
-				children: null
-			}
-		];
-
+		this.freshTree();
 		this.rawData = '#abc';
 		this.title = "test";
 		this.init();
@@ -121,16 +72,33 @@ export class PersonalDocumentComponent implements OnInit {
 		}
 	}
 
-	deleteDoc() {}
-
-	saveDoc() {}
-
-	newDoc() {
-		this.show()
+	deleteDoc() {
+		
 	}
 
-	showNewDialog() {
+	saveDoc() {
+		
+	}
 
+	newDoc() {
+		var id = this.dataService.user["id"];
+		this.dialogService.addDialog(NewFileDialogComponent, {
+			title: '新建文件',
+			message: '新建文件',
+			nodes: this.nodes,
+			userId: id
+		}).subscribe((obj) => {
+			if(obj != null){
+				this.dataService.documents; //前端更改信息
+				this.freshTree();
+				console.log(obj);
+			}
+			
+		});
+	}
+
+	freshTree(){
+		this.nodes = this.dataService.documents;
 	}
 
 }

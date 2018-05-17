@@ -7,36 +7,29 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-//@Table(indexes={@Index(name="isRoot",columnList="isRoot")})
 public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String objectId;
-    private Date createTime;
-    private Date changeTime;
-    private String type;  //文件夹 ，个人文档
-    private int zindex;
+    private Date createTime = new Date();
+    private Date changeTime = new Date();
+    @Column(nullable = false)
+    private String type;  //文件夹 ，个人文档，共享
+    private int zindex;  //安全等级，任何人可见等
     private boolean isRoot;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
-    private Set<Document> childDocuments;
-    private String title;
+    private Set<Document> children;
+    private String text;
     private String profile;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.REFRESH,CascadeType.MERGE})
     @JoinTable(name = "user_document",
             joinColumns = {@JoinColumn(name = "document_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
     @JsonBackReference
     private Set<User> userSet;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_document",
-            joinColumns = {@JoinColumn(name = "document_id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id")})
-    @JsonBackReference
-    private Set<User> userSet1;
 
     public int getZindex() {
         return zindex;
@@ -54,12 +47,20 @@ public class Document {
         isRoot = root;
     }
 
-    public Set<Document> getChildDocuments() {
-        return childDocuments;
+    public Set<Document> getChildren() {
+        return children;
     }
 
-    public void setChildDocuments(Set<Document> childDocuments) {
-        this.childDocuments = childDocuments;
+    public void setChildren(Set<Document> children) {
+        this.children = children;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public Long getId() {
@@ -102,13 +103,6 @@ public class Document {
         this.type = type;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getProfile() {
         return profile;

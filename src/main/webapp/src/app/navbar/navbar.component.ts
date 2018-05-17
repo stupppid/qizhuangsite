@@ -34,13 +34,15 @@ export class NavbarComponent implements OnInit {
 			title:"注册",
 			type:"signUp"
 		}).subscribe((obj) => {
-			this.dialogService.show(<BuiltInOptions>{  
+			if(obj){
+				this.dialogService.show(<BuiltInOptions>{
           content: "注册成功",  
           icon: 'success',  
           size: 'sm', 
           timeout:1000,
           showCancelButton: false
-	     });
+			     });
+				};
 		});
 	}
 	

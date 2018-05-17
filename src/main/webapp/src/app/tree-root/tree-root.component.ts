@@ -43,4 +43,13 @@ export class TreeRootComponent implements OnInit {
 	changeName(node) {
 
 	}
+	colorDependOnType(tp:string){
+		var specialStyle = "";
+		if(tp == "folder"){
+			specialStyle = "lightskyblue";
+		}else if(tp == "text"){
+			specialStyle = "white";
+		}
+		return specialStyle;
+	}
 }

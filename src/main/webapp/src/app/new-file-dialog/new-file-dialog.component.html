@@ -8,13 +8,33 @@
 			<label for="path">新建文件：</label>
 			<input type="text" id="path" class="form-control" (keyup)="changePath($event)" [(ngModel)]="newFilePath" />
 			<div *ngIf="selectedNode != null">
-				<button id="" class="btn btn-outline-info" *ngFor="let nd of selectedNode.children" (click)="addPath(nd)">
-            		{{nd.text}}&nbsp;
-            	</button>
+				<div *ngFor="let nd of selectedNode.children">
+					<button id="" class="btn btn-outline-info" *ngIf="nd.type=='folder'" (click)="addPath(nd)">
+	            		{{nd.text}}
+	            	</button>&nbsp;
+				</div>
+			</div>
+			<hr />
+			<div class="btn-group" #dropdown="bs-dropdown" dropdown>
+				<button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+        		类型<span class="caret"></span>
+      </button> &nbsp;&nbsp;&nbsp;
+				<ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+					<li *ngFor="let t of allTypes" role="menuitem">
+						<button class="dropdown-item" (click)="dropdown.hide();type=t;">{{t}}</button>
+					</li>
+				</ul>
+			</div>
+			<span>
+      	{{type}}
+    </span>
+			<div *ngIf="type==allTypes[1]">
+				<!--<label class="alert-info">名称 <input class="form-control" [(ngModel)]="text" type="text"/></label><br />-->
+				<label style="width: 100%;" class="alert-info">简介 <input class="form-control" [(ngModel)]="profile"  type="text"/></label>
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-primary" (click)="close()">确定</button>
+			<button type="button" class="btn btn-primary" (click)="ensure()">确定</button>
 			<button type="button" class="btn btn-default" (click)="close()">取消</button>
 		</div>
 	</div>
