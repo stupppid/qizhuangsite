@@ -9,9 +9,7 @@
 			<input type="text" id="path" class="form-control" (keyup)="changePath($event)" [(ngModel)]="newFilePath" />
 			<div *ngIf="selectedNode != null">
 				<div *ngFor="let nd of selectedNode.children">
-					<button id="" class="btn btn-outline-info" *ngIf="nd.type=='folder'" (click)="addPath(nd)">
-	            		{{nd.text}}
-	            	</button>&nbsp;
+					<button id="" class="btn btn-outline-info" *ngIf="ifButtonShow(nd)" (click)="addPath(nd)">{{nd.text}}</button>&nbsp;
 				</div>
 			</div>
 			<hr />
@@ -29,7 +27,7 @@
       	{{type}}
     </span>
 			<div *ngIf="type==allTypes[1]">
-				<!--<label class="alert-info">名称 <input class="form-control" [(ngModel)]="text" type="text"/></label><br />-->
+				<label class="alert-info">标题 <input class="form-control" [(ngModel)]="text" type="text"/></label><br />
 				<label style="width: 100%;" class="alert-info">简介 <input class="form-control" [(ngModel)]="profile"  type="text"/></label>
 			</div>
 		</div>

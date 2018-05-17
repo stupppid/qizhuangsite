@@ -22,7 +22,7 @@ public class DocumentController {
     private DocumentService documentService;
 
     @RequestMapping("/createNewFile")
-    public BasicDto createNewFile(@RequestBody FileDto fileDto){
+    public Document createNewFile(@RequestBody FileDto fileDto){
         Document document = new Document();
         Document lastDocument = document;
         Document rootDocument = document;
@@ -55,9 +55,8 @@ public class DocumentController {
             document = new Document();
         }
         rootDocument.setRoot(fileDto.getPid() == 0);
-
-        this.documentService.saveNewFile(rootDocument,fileDto.getPid());
-        return new BasicDto("");
+        Document doc = this.documentService.saveNewFile(rootDocument,fileDto);
+        return doc;
     }
 
 }

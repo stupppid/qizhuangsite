@@ -16,9 +16,8 @@ spring:
   data:
     mongodb:
       uri: mongodb://qizhuang:123456@192.168.136.133:27017/qizhuangsite
-
   jpa:
-    #database: MYSQL
+    database: MYSQL
     show-sql: true
     hibernate:
       ddl-auto: update

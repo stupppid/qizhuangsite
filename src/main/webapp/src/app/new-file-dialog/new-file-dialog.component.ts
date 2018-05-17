@@ -43,7 +43,8 @@ export class NewFileDialogComponent extends DialogComponent < newFileModel, null
 		rootSet = false;
 		pid: number = 0;
 		pList: string[] = [];
-
+  		selectedNode: TreeNode = new TreeNode();
+  
 		constructor(dialogService: DialogService,
 			private dataService: DataService,
 			private documentService: DocumentService) {
@@ -52,12 +53,14 @@ export class NewFileDialogComponent extends DialogComponent < newFileModel, null
 
 		ngOnInit() {
 			this.userId = this.dataService.user.id;
+			this.selectedNode.children=this.nodes;
 			this.regexp = "\w";
 			this.allTypes = ["folder", "text"];
 		}
 
 		addPath(path: TreeNode) {
 			var pathNames = this.newFilePath.split("/");
+			this.selectedNode = path;
 			this.newFilePath += path.text + '/';
 			this.pathNamesNumber = pathNames.length + 1;
 			this.selectedNodeStack[this.pathNamesNumber] = path;
@@ -70,14 +73,18 @@ export class NewFileDialogComponent extends DialogComponent < newFileModel, null
 		inputEnter(inputChar) {
 			return inputChar == 13;
 		}
+		
+		ifButtonShow(nd:TreeNode){
+			return nd.type==this.allTypes[0];
+		}
 
 		showError(msg: string) {
 			this.dialogService.show(<BuiltInOptions>{  
-          content: msg,  
-          icon: 'error',  
-          size: 'sm', 
-          showCancelButton: false  
-	      })  
+	          content: msg,
+	          icon: 'error',
+	          size: 'sm',
+	          showCancelButton: false
+	      	})
 		}
 	
 	ensure(){
@@ -103,13 +110,7 @@ export class NewFileDialogComponent extends DialogComponent < newFileModel, null
 				"pid":this.pid
 			};
 			this.documentService.createNewFile(this.obj).subscribe(res=>{
-				if(res == null || res["errorMsg"] == null ) {
-						this.showError("服务器错误!");
-					}else if(res["errorMsg"] != ""){
-						this.showError(res["errorMsg"].toString());
-					} else {
-						this.close(res);
-					}
+				this.close(res);
 			},err=>{
 				console.log(err);
 				this.showError("服务认证错误,请稍后再试");
@@ -122,8 +123,7 @@ export class NewFileDialogComponent extends DialogComponent < newFileModel, null
 		var pathList:string[] = [];
 		var nowPath1:TreeNode[] = this.dataService.documents;
 		for(let a in pathList1){
-			console.log(a);
-			if(a != '' && a != '/'){
+			if(pathList1[a] != '' && pathList1[a] != '/'){
 				pathList.push(pathList1[a]);
 			}
 		}
@@ -148,11 +148,8 @@ export class NewFileDialogComponent extends DialogComponent < newFileModel, null
 					++num;
 				}
 		}
-		if(num>=(pathList.length)){
-			this.pList = [];
-		}else{
+		if(num<(pathList.length)){
 			this.pList = pathList.slice(num,pathList.length);
 		}
 	}
-	
 }
