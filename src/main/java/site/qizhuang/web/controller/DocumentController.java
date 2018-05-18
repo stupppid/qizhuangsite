@@ -1,14 +1,14 @@
 package site.qizhuang.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import site.qizhuang.web.config.DocumentType;
 import site.qizhuang.web.domain.Document;
+import site.qizhuang.web.domain.MongoDocument;
 import site.qizhuang.web.domain.User;
 import site.qizhuang.web.dto.BasicDto;
 import site.qizhuang.web.dto.FileDto;
+import site.qizhuang.web.dto.SaveNewFileDto;
 import site.qizhuang.web.service.DocumentService;
 
 import java.util.Date;
@@ -21,8 +21,26 @@ public class DocumentController {
     @Autowired
     private DocumentService documentService;
 
-    @RequestMapping("/createNewFile")
-    public Document createNewFile(@RequestBody FileDto fileDto){
+    @GetMapping("/getDoc/{objectId}")
+    public MongoDocument getDoc(@PathVariable String objectId){
+        return this.documentService.getDoc(objectId);
+    }
+
+    @DeleteMapping("/deleteDoc/{id}")
+    public BasicDto deleteDoc(@PathVariable Long id){
+        return this.documentService.deleteDoc(id);
+    }
+
+    @PostMapping("/saveDoc/{objectId}")
+    public BasicDto saveDoc(@PathVariable String objectId,@RequestBody String content){
+        MongoDocument mongoDocument = new MongoDocument();
+        mongoDocument.setId(objectId);
+        mongoDocument.setContent(content);
+        return this.documentService.saveDoc(mongoDocument);
+    }
+
+    @PostMapping("/createNewFile")
+    public SaveNewFileDto createNewFile(@RequestBody FileDto fileDto){
         Document document = new Document();
         Document lastDocument = document;
         Document rootDocument = document;
@@ -55,8 +73,7 @@ public class DocumentController {
             document = new Document();
         }
         rootDocument.setRoot(fileDto.getPid() == 0);
-        Document doc = this.documentService.saveNewFile(rootDocument,fileDto);
-        return doc;
+        return this.documentService.saveNewFile(rootDocument,fileDto);
     }
 
 }

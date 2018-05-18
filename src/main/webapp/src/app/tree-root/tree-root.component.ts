@@ -16,9 +16,6 @@ export class TreeRootComponent implements OnInit {
 	constructor() {}
 
 	ngOnInit() {
-		$(document).ready(function() {
-
-		})
 	}
 
 	isNotLast(nd) {

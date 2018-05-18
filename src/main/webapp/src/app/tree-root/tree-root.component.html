@@ -1,5 +1,5 @@
 <div *ngFor="let node of nodes" id="node.id" class="tree-node" >
-	<div style="display: inline-block;">
+	<div style="display: inline-block;" *ngIf="!node.deleted">
 		<span class="node-text" [style.color]="colorDependOnType(node.type)"
 			(dblclick)="changeSelectedNode(node)" (keyup)="changeName(node)">
 			> {{node.text}}

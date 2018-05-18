@@ -44,6 +44,8 @@ export class NewFileDialogComponent extends DialogComponent < newFileModel, null
 		pid: number = 0;
 		pList: string[] = [];
   		selectedNode: TreeNode = new TreeNode();
+  		nowParent:TreeNode[] = [];
+  		
   
 		constructor(dialogService: DialogService,
 			private dataService: DataService,
@@ -99,7 +101,7 @@ export class NewFileDialogComponent extends DialogComponent < newFileModel, null
 			this.checkPath();
 			if(this.pList.length == 0){
 				this.showError("请检查文件路径最后是否有文件名");
-				return
+				return;
 			}
 			this.obj = {
 				"path":this.pList,
@@ -110,6 +112,7 @@ export class NewFileDialogComponent extends DialogComponent < newFileModel, null
 				"pid":this.pid
 			};
 			this.documentService.createNewFile(this.obj).subscribe(res=>{
+				this.nowParent.push(res["document"]);
 				this.close(res);
 			},err=>{
 				console.log(err);
@@ -136,10 +139,12 @@ export class NewFileDialogComponent extends DialogComponent < newFileModel, null
 							ifFind = true;
 							this.pid = nowPath1[cnowPath]["id"];
 							nowPath1 = nowPath1[cnowPath].children;
+							this.nowParent = nowPath1;
 							break;
 						}
 					}
 				}else{
+					this.nowParent = this.dataService.documents;
 					break;
 				}
 				if(!ifFind){

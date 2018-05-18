@@ -17,6 +17,7 @@ import { DocumentTreeComponent } from './document-tree/document-tree.component';
 import { TreeRootComponent } from './tree-root/tree-root.component';
 import { NewFileDialogComponent } from './new-file-dialog/new-file-dialog.component';
 import { SignUpDialogComponent } from './sign-up-dialog/sign-up-dialog.component'; 
+import { ConfirmComponent } from './confirm/confirm.component';
 
 import { DocumentService } from './service/document.service';
 import { UserService } from './service/user.service';
@@ -33,7 +34,8 @@ import { DataService } from './service/data.service';
     DocumentTreeComponent,
     TreeRootComponent,
     NewFileDialogComponent,
-    SignUpDialogComponent
+    SignUpDialogComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import { DataService } from './service/data.service';
   ],
   entryComponents: [
     NewFileDialogComponent,
-    SignUpDialogComponent
+    SignUpDialogComponent,
+    ConfirmComponent
 	],
   providers: [
   	DocumentService,

@@ -16,6 +16,7 @@ public class Document {
     private Date changeTime = new Date();
     @Column(nullable = false)
     private String type;  //文件夹 ，个人文档，共享
+    private boolean isDeleted = false;
     private int zindex;  //安全等级，任何人可见等
     private boolean isRoot;
     @OneToMany(cascade = CascadeType.ALL)
@@ -30,6 +31,14 @@ public class Document {
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
     @JsonBackReference
     private Set<User> userSet;
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
 
     public int getZindex() {
         return zindex;

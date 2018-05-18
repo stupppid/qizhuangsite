@@ -6,7 +6,7 @@
 	
 	<div class="navbar-nav col-sm-7 itemheight">
 		<div class="nav-item btn-group">
-			<button class="btn btn-dark">管家</button>
+			<button class="btn btn-dark" (click)="test()">管家</button>
 			<button class="btn btn-dark" (click)="signUp()">注册</button>
 			<button *ngIf = "!ifSignIn" class="btn btn-dark" (click)="signIn()">登录</button>
 			<button *ngIf = "ifSignIn" class="btn btn-dark" (click)="logOut()">退出登录</button>

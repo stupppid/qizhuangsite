@@ -9,13 +9,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.136.133:3306/qizhuangsite?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://192.168.136.133:3306/qizhuangsite?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
     username: root
     password: 123456
-
-  data:
-    mongodb:
-      uri: mongodb://qizhuang:123456@192.168.136.133:27017/qizhuangsite
   jpa:
     database: MYSQL
     show-sql: true
@@ -24,7 +20,11 @@ spring:
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+        dialect: org.hibernate.dialect.MySQL57Dialect
   jackson:
     serialization:
       indent_output: true
+
+  data:
+    mongodb:
+      uri: mongodb://qizhuang:123456@192.168.136.133:27017/qizhuangsite

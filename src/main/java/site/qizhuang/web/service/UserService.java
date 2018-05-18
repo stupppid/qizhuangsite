@@ -67,5 +67,4 @@ public class UserService {
         userWithAllDto.setErrorMsg("");
         return userWithAllDto;
     }
-
 }

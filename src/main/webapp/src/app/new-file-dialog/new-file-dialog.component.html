@@ -8,8 +8,8 @@
 			<label for="path">新建文件：</label>
 			<input type="text" id="path" class="form-control" (keyup)="changePath($event)" [(ngModel)]="newFilePath" />
 			<div *ngIf="selectedNode != null">
-				<div *ngFor="let nd of selectedNode.children">
-					<button id="" class="btn btn-outline-info" *ngIf="ifButtonShow(nd)" (click)="addPath(nd)">{{nd.text}}</button>&nbsp;
+				<div *ngFor="let nd of selectedNode.children" class="btn-group">
+					<button class="btn btn-outline-info" *ngIf="ifButtonShow(nd)" (click)="addPath(nd)">{{nd.text}}</button>&nbsp;
 				</div>
 			</div>
 			<hr />

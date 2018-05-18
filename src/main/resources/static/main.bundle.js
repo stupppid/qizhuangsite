@@ -161,15 +161,17 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__tree_root_tree_root_component__ = __webpack_require__("./src/app/tree-root/tree-root.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__new_file_dialog_new_file_dialog_component__ = __webpack_require__("./src/app/new-file-dialog/new-file-dialog.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__sign_up_dialog_sign_up_dialog_component__ = __webpack_require__("./src/app/sign-up-dialog/sign-up-dialog.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__service_document_service__ = __webpack_require__("./src/app/service/document.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__service_user_service__ = __webpack_require__("./src/app/service/user.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__service_data_service__ = __webpack_require__("./src/app/service/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__confirm_confirm_component__ = __webpack_require__("./src/app/confirm/confirm.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__service_document_service__ = __webpack_require__("./src/app/service/document.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__service_user_service__ = __webpack_require__("./src/app/service/user.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__service_data_service__ = __webpack_require__("./src/app/service/data.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -206,7 +208,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_14__document_tree_document_tree_component__["a" /* DocumentTreeComponent */],
                 __WEBPACK_IMPORTED_MODULE_15__tree_root_tree_root_component__["a" /* TreeRootComponent */],
                 __WEBPACK_IMPORTED_MODULE_16__new_file_dialog_new_file_dialog_component__["a" /* NewFileDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_17__sign_up_dialog_sign_up_dialog_component__["a" /* SignUpDialogComponent */]
+                __WEBPACK_IMPORTED_MODULE_17__sign_up_dialog_sign_up_dialog_component__["a" /* SignUpDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_18__confirm_confirm_component__["a" /* ConfirmComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -219,12 +222,13 @@ var AppModule = /** @class */ (function () {
             ],
             entryComponents: [
                 __WEBPACK_IMPORTED_MODULE_16__new_file_dialog_new_file_dialog_component__["a" /* NewFileDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_17__sign_up_dialog_sign_up_dialog_component__["a" /* SignUpDialogComponent */]
+                __WEBPACK_IMPORTED_MODULE_17__sign_up_dialog_sign_up_dialog_component__["a" /* SignUpDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_18__confirm_confirm_component__["a" /* ConfirmComponent */]
             ],
             providers: [
-                __WEBPACK_IMPORTED_MODULE_18__service_document_service__["a" /* DocumentService */],
-                __WEBPACK_IMPORTED_MODULE_19__service_user_service__["a" /* UserService */],
-                __WEBPACK_IMPORTED_MODULE_20__service_data_service__["a" /* DataService */]
+                __WEBPACK_IMPORTED_MODULE_19__service_document_service__["a" /* DocumentService */],
+                __WEBPACK_IMPORTED_MODULE_20__service_user_service__["a" /* UserService */],
+                __WEBPACK_IMPORTED_MODULE_21__service_data_service__["a" /* DataService */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* AppComponent */]]
         })
@@ -315,6 +319,69 @@ var leftbutton = {
         }
     ]
 };
+
+
+/***/ }),
+
+/***/ "./src/app/confirm/confirm.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "    <div class=\"modal-dialog\">  \r\n        <div class=\"modal-content\">  \r\n            <div class=\"modal-header\">  \r\n            \t<h4 class=\"modal-title\">{{title}}</h4>  \r\n                <button type=\"button\" (click)=\"cancel()\" >&times;</button>  \r\n            </div>  \r\n            <div class=\"modal-body\">  \r\n                {{message}}\r\n            </div>  \r\n            <div class=\"modal-footer\">  \r\n            \t<button type=\"button\" class=\"btn btn-default\" (click)=\"confirm()\">是</button>  \r\n                <button type=\"button\" class=\"btn btn-primary\" (click)=\"cancel()\">否</button>  \r\n            </div>  \r\n        </div>  \r\n    </div>  "
+
+/***/ }),
+
+/***/ "./src/app/confirm/confirm.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConfirmComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ngx_bootstrap_modal__ = __webpack_require__("./node_modules/ngx-bootstrap-modal/bundles/ngx-bootstrap-modal.umd.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ngx_bootstrap_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ngx_bootstrap_modal__);
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ConfirmComponent = /** @class */ (function (_super) {
+    __extends(ConfirmComponent, _super);
+    function ConfirmComponent(dialogService) {
+        return _super.call(this, dialogService) || this;
+    }
+    ConfirmComponent.prototype.confirm = function () {
+        // on click on confirm button we set dialog result as true,  
+        // ten we can get dialog result from caller code  
+        this.close(true);
+    };
+    ConfirmComponent.prototype.cancel = function () {
+        this.close(false);
+    };
+    ConfirmComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'confirm',
+            template: __webpack_require__("./src/app/confirm/confirm.component.html")
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ngx_bootstrap_modal__["DialogService"]])
+    ], ConfirmComponent);
+    return ConfirmComponent;
+}(__WEBPACK_IMPORTED_MODULE_1_ngx_bootstrap_modal__["DialogComponent"]));
+
 
 
 /***/ }),
@@ -523,7 +590,7 @@ module.exports = ".itemheight{\r\n\theight: 44px;\r\n}\r\n\r\n.banner{\r\n\tposi
 /***/ "./src/app/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"navbar navbar-expand-sm bg-dark navbar-dark row\">\r\n\t<div class=\"navbar-brand col-sm-3 itemheight\">\r\n\t\t<div class=\"bgRound\"></div>\n\t\t<img class=\"banner\" src=\"../../assets/favicon.gif\" alt=\"Logo\"/>\r\n\t</div>\r\n\t\r\n\t<div class=\"navbar-nav col-sm-7 itemheight\">\n\t\t<div class=\"nav-item btn-group\">\r\n\t\t\t<button class=\"btn btn-dark\">管家</button>\r\n\t\t\t<button class=\"btn btn-dark\" (click)=\"signUp()\">注册</button>\r\n\t\t\t<button *ngIf = \"!ifSignIn\" class=\"btn btn-dark\" (click)=\"signIn()\">登录</button>\r\n\t\t\t<button *ngIf = \"ifSignIn\" class=\"btn btn-dark\" (click)=\"logOut()\">退出登录</button>\r\n\t\t</div>\n\t</div>\r\n\t<div class=\"navbar-nav col-sm-2 itemheight\">\n\t\t<div class=\"nav-item input-group\">\r\n\t\t\t<input class=\"form-control\" style=\"height: 44px;\" type=\"text\" name=\"search\" id=\"search\"/>\r\n\t\t\t<div class=\"input-group-addon btn btn-light\" style=\"border-radius:0 4px 4px 0;\">\n\t\t\t\t<img style=\"height: 30px;margin-right: -3px;\" src=\"../../assets/search.gif\" alt=\"Search\"/>\n\t\t\t</div>\r\n\t\t</div>\n\t</div>\r\n</div>"
+module.exports = "<div class=\"navbar navbar-expand-sm bg-dark navbar-dark row\">\r\n\t<div class=\"navbar-brand col-sm-3 itemheight\">\r\n\t\t<div class=\"bgRound\"></div>\n\t\t<img class=\"banner\" src=\"../../assets/favicon.gif\" alt=\"Logo\"/>\r\n\t</div>\r\n\t\r\n\t<div class=\"navbar-nav col-sm-7 itemheight\">\n\t\t<div class=\"nav-item btn-group\">\r\n\t\t\t<button class=\"btn btn-dark\" (click)=\"test()\">管家</button>\r\n\t\t\t<button class=\"btn btn-dark\" (click)=\"signUp()\">注册</button>\r\n\t\t\t<button *ngIf = \"!ifSignIn\" class=\"btn btn-dark\" (click)=\"signIn()\">登录</button>\r\n\t\t\t<button *ngIf = \"ifSignIn\" class=\"btn btn-dark\" (click)=\"logOut()\">退出登录</button>\r\n\t\t</div>\n\t</div>\r\n\t<div class=\"navbar-nav col-sm-2 itemheight\">\n\t\t<div class=\"nav-item input-group\">\r\n\t\t\t<input class=\"form-control\" style=\"height: 44px;\" type=\"text\" name=\"search\" id=\"search\"/>\r\n\t\t\t<div class=\"input-group-addon btn btn-light\" style=\"border-radius:0 4px 4px 0;\">\n\t\t\t\t<img style=\"height: 30px;margin-right: -3px;\" src=\"../../assets/search.gif\" alt=\"Search\"/>\n\t\t\t</div>\r\n\t\t</div>\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -586,6 +653,19 @@ var NavbarComponent = /** @class */ (function () {
     NavbarComponent.prototype.logOut = function () {
         this.logOutInit.emit(true);
     };
+    NavbarComponent.prototype.test = function () {
+        var s = this.dialogService;
+        this.dialogService.show({
+            type: 'confirm',
+            content: "test",
+            icon: 'warning',
+            size: 'sm',
+            showCancelButton: true
+        });
+    };
+    NavbarComponent.prototype.showa = function (a) {
+        console.log(a);
+    };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", Boolean)
@@ -623,7 +703,7 @@ module.exports = ""
 /***/ "./src/app/new-file-dialog/new-file-dialog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal-dialog\">\r\n\t<div class=\"modal-content\">\r\n\t\t<div class=\"modal-header\">\r\n\t\t\t<h4 class=\"modal-title\">{{title}}</h4>\r\n\t\t\t<button type=\"button\" class=\"close\" (click)=\"close()\">&times;</button>\r\n\t\t</div>\r\n\t\t<div class=\"modal-body\">\r\n\t\t\t<label for=\"path\">新建文件：</label>\r\n\t\t\t<input type=\"text\" id=\"path\" class=\"form-control\" (keyup)=\"changePath($event)\" [(ngModel)]=\"newFilePath\" />\r\n\t\t\t<div *ngIf=\"selectedNode != null\">\r\n\t\t\t\t<div *ngFor=\"let nd of selectedNode.children\">\r\n\t\t\t\t\t<button id=\"\" class=\"btn btn-outline-info\" *ngIf=\"ifButtonShow(nd)\" (click)=\"addPath(nd)\">\r\n\t            \t\t{{nd.text}}\r\n\t            \t</button>&nbsp;\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<hr />\r\n\t\t\t<div class=\"btn-group\" #dropdown=\"bs-dropdown\" dropdown>\r\n\t\t\t\t<button id=\"button-basic\" dropdownToggle type=\"button\" class=\"btn btn-primary dropdown-toggle\" aria-controls=\"dropdown-basic\">\r\n        \t\t类型<span class=\"caret\"></span>\r\n      </button> &nbsp;&nbsp;&nbsp;\r\n\t\t\t\t<ul id=\"dropdown-basic\" *dropdownMenu class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"button-basic\">\r\n\t\t\t\t\t<li *ngFor=\"let t of allTypes\" role=\"menuitem\">\r\n\t\t\t\t\t\t<button class=\"dropdown-item\" (click)=\"dropdown.hide();type=t;\">{{t}}</button>\r\n\t\t\t\t\t</li>\r\n\t\t\t\t</ul>\r\n\t\t\t</div>\r\n\t\t\t<span>\r\n      \t{{type}}\r\n    </span>\r\n\t\t\t<div *ngIf=\"type==allTypes[1]\">\r\n\t\t\t\t<label class=\"alert-info\">名称 <input class=\"form-control\" [(ngModel)]=\"text\" type=\"text\"/></label><br />\r\n\t\t\t\t<label style=\"width: 100%;\" class=\"alert-info\">简介 <input class=\"form-control\" [(ngModel)]=\"profile\"  type=\"text\"/></label>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"modal-footer\">\r\n\t\t\t<button type=\"button\" class=\"btn btn-primary\" (click)=\"ensure()\">确定</button>\r\n\t\t\t<button type=\"button\" class=\"btn btn-default\" (click)=\"close()\">取消</button>\r\n\t\t</div>\r\n\t</div>\r\n</div>"
+module.exports = "<div class=\"modal-dialog\">\r\n\t<div class=\"modal-content\">\r\n\t\t<div class=\"modal-header\">\r\n\t\t\t<h4 class=\"modal-title\">{{title}}</h4>\r\n\t\t\t<button type=\"button\" class=\"close\" (click)=\"close()\">&times;</button>\r\n\t\t</div>\r\n\t\t<div class=\"modal-body\">\r\n\t\t\t<label for=\"path\">新建文件：</label>\r\n\t\t\t<input type=\"text\" id=\"path\" class=\"form-control\" (keyup)=\"changePath($event)\" [(ngModel)]=\"newFilePath\" />\r\n\t\t\t<div *ngIf=\"selectedNode != null\">\r\n\t\t\t\t<div *ngFor=\"let nd of selectedNode.children\" class=\"btn-group\">\r\n\t\t\t\t\t<button class=\"btn btn-outline-info\" *ngIf=\"ifButtonShow(nd)\" (click)=\"addPath(nd)\">{{nd.text}}</button>&nbsp;\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<hr />\r\n\t\t\t<div class=\"btn-group\" #dropdown=\"bs-dropdown\" dropdown>\r\n\t\t\t\t<button id=\"button-basic\" dropdownToggle type=\"button\" class=\"btn btn-primary dropdown-toggle\" aria-controls=\"dropdown-basic\">\r\n        \t\t类型<span class=\"caret\"></span>\r\n      </button> &nbsp;&nbsp;&nbsp;\r\n\t\t\t\t<ul id=\"dropdown-basic\" *dropdownMenu class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"button-basic\">\r\n\t\t\t\t\t<li *ngFor=\"let t of allTypes\" role=\"menuitem\">\r\n\t\t\t\t\t\t<button class=\"dropdown-item\" (click)=\"dropdown.hide();type=t;\">{{t}}</button>\r\n\t\t\t\t\t</li>\r\n\t\t\t\t</ul>\r\n\t\t\t</div>\r\n\t\t\t<span>\r\n      \t{{type}}\r\n    </span>\r\n\t\t\t<div *ngIf=\"type==allTypes[1]\">\r\n\t\t\t\t<label class=\"alert-info\">标题 <input class=\"form-control\" [(ngModel)]=\"text\" type=\"text\"/></label><br />\r\n\t\t\t\t<label style=\"width: 100%;\" class=\"alert-info\">简介 <input class=\"form-control\" [(ngModel)]=\"profile\"  type=\"text\"/></label>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"modal-footer\">\r\n\t\t\t<button type=\"button\" class=\"btn btn-primary\" (click)=\"ensure()\">确定</button>\r\n\t\t\t<button type=\"button\" class=\"btn btn-default\" (click)=\"close()\">取消</button>\r\n\t\t</div>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -678,6 +758,7 @@ var NewFileDialogComponent = /** @class */ (function (_super) {
         _this.pid = 0;
         _this.pList = [];
         _this.selectedNode = new __WEBPACK_IMPORTED_MODULE_2__domain_tree_node_tree_node__["a" /* TreeNode */]();
+        _this.nowParent = [];
         return _this;
     }
     NewFileDialogComponent.prototype.ngOnInit = function () {
@@ -737,6 +818,7 @@ var NewFileDialogComponent = /** @class */ (function (_super) {
                 "pid": this.pid
             };
             this.documentService.createNewFile(this.obj).subscribe(function (res) {
+                _this.nowParent.push(res["document"]);
                 _this.close(res);
             }, function (err) {
                 console.log(err);
@@ -762,11 +844,13 @@ var NewFileDialogComponent = /** @class */ (function (_super) {
                         ifFind = true;
                         this.pid = nowPath1[cnowPath]["id"];
                         nowPath1 = nowPath1[cnowPath].children;
+                        this.nowParent = nowPath1;
                         break;
                     }
                 }
             }
             else {
+                this.nowParent = this.dataService.documents;
                 break;
             }
             if (!ifFind) {
@@ -874,6 +958,7 @@ module.exports = "<app-document-tree style=\"position: absolute;z-index:100;left
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__new_file_dialog_new_file_dialog_component__ = __webpack_require__("./src/app/new-file-dialog/new-file-dialog.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_data_service__ = __webpack_require__("./src/app/service/data.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__service_document_service__ = __webpack_require__("./src/app/service/document.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__confirm_confirm_component__ = __webpack_require__("./src/app/confirm/confirm.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -889,17 +974,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var PersonalDocumentComponent = /** @class */ (function () {
     function PersonalDocumentComponent(dialogService, dataService, documentService) {
         this.dialogService = dialogService;
         this.dataService = dataService;
         this.documentService = documentService;
         this.edit = false;
+        this.ifChanged = true;
+        this.defaultRawData = '#请从资源管理器选择一个文件';
     }
     PersonalDocumentComponent.prototype.ngOnInit = function () {
         this.freshTree();
-        this.rawData = '#abc';
-        this.title = "test";
+        this.rawData = this.defaultRawData;
+        this.title = "";
         this.init();
     };
     PersonalDocumentComponent.prototype.init = function () {
@@ -908,20 +996,40 @@ var PersonalDocumentComponent = /** @class */ (function () {
         this.refreshHTML();
         this.changeWidth();
         this.height = __WEBPACK_IMPORTED_MODULE_1_jquery__("#htmlPanel").height();
+        this.ifChanged = false;
+        this.ifSelect = false;
     };
     PersonalDocumentComponent.prototype.setPanelHeight = function (add) {
         this.height = this.height + add;
         __WEBPACK_IMPORTED_MODULE_1_jquery__("#textPanel").height(this.height);
     };
     PersonalDocumentComponent.prototype.refreshHTML = function () {
+        this.ifChanged = true;
         this.showData = this.converter.makeHtml(this.rawData);
     };
     PersonalDocumentComponent.prototype.select = function (nd) {
-        if (nd == null) {
+        var _this = this;
+        this.ifSelect = true;
+        if (nd == null || nd.type == "folder" || this.objectId == nd["objectId"]) {
             return;
         }
         else {
-            console.log(nd);
+            this.documentService.getDoc(nd["objectId"]).subscribe(function (res) {
+                if (res == null) {
+                    _this.showError("远程服务未找到该文件!");
+                }
+                else {
+                    if (_this.ifChanged) {
+                        _this.showConfirm(res, nd["id"]);
+                    }
+                    else {
+                        _this.doCatchNewFile(res, nd["id"]);
+                    }
+                }
+            }, function (err) {
+                console.log(err);
+                _this.showError("远程服务出错!");
+            });
         }
     };
     PersonalDocumentComponent.prototype.editDoc = function () {
@@ -937,8 +1045,89 @@ var PersonalDocumentComponent = /** @class */ (function () {
         }
     };
     PersonalDocumentComponent.prototype.deleteDoc = function () {
+        var _this = this;
+        if (!this.ifSelect) {
+            this.showError("该文档是界面初始文档不能删改!");
+            return;
+        }
+        this.documentService.deleteDoc(this.id).subscribe(function (res) {
+            if (res == null || res["errorMsg"] == null) {
+                _this.showError("服务器错误!");
+            }
+            else if (res["errorMsg"] != "") {
+                _this.showError(res["errorMsg"].toString());
+            }
+            else {
+                var nd = _this.findTreeNode(_this.id, _this.dataService.documents);
+                if (nd != null) {
+                    var num = 0;
+                    nd.forEach(function (o, i) {
+                        if (o["id"] == _this.id) {
+                            num = i;
+                            return;
+                        }
+                    });
+                    nd.splice(num, 1);
+                }
+                else {
+                    _this.showError("出现BUG!重新登录一下.");
+                }
+                _this.rawData = _this.defaultRawData;
+                _this.showData = _this.converter.makeHtml(_this.rawData);
+                _this.refreshHTML();
+                _this.ifChanged = false;
+                _this.ifSelect = false;
+                _this.id = 0;
+                _this.showSuccess("删除成功");
+            }
+        }, function (err) {
+            _this.showError("服务认证错误,请稍后再试");
+        });
+    };
+    PersonalDocumentComponent.prototype.findTreeNode = function (id, nodes) {
+        for (var nd in nodes) {
+            if (nodes[nd]["type"] != "folder") {
+                if (nodes[nd]["id"] == id) {
+                    return nodes;
+                }
+                else {
+                    continue;
+                }
+            }
+            else if (nodes[nd]["children"] != null && nodes[nd]["children"].length > 0) {
+                var q = this.findTreeNode(id, nodes[nd]["children"]);
+                if (q != null) {
+                    return q;
+                }
+                else {
+                    continue;
+                }
+            }
+            else {
+                return null;
+            }
+        }
     };
     PersonalDocumentComponent.prototype.saveDoc = function () {
+        var _this = this;
+        if (!this.ifSelect) {
+            this.showError("该文档是界面初始文档不能删改!");
+            return;
+        }
+        this.documentService.saveDoc(this.objectId, this.rawData).subscribe(function (res) {
+            if (res == null || res["errorMsg"] == null) {
+                _this.showError("服务器错误!");
+            }
+            else if (res["errorMsg"] != "") {
+                _this.showError(res["errorMsg"].toString());
+            }
+            else {
+                _this.showSuccess("保存成功");
+            }
+        }, function (err) {
+            _this.showError("服务认证错误,请稍后再试");
+        });
+        this.ifChanged = false;
     };
     PersonalDocumentComponent.prototype.newDoc = function () {
         var _this = this;
@@ -950,15 +1139,56 @@ var PersonalDocumentComponent = /** @class */ (function () {
             userId: id
         }).subscribe(function (obj) {
             if (obj != null) {
-                _this.dataService.documents; //前端更改信息
                 _this.freshTree();
-                console.log(obj);
+            }
+            else {
+                //				this.showError("创建失败!");
             }
         });
     };
     PersonalDocumentComponent.prototype.freshTree = function () {
         this.nodes = this.dataService.documents;
     };
+    PersonalDocumentComponent.prototype.showError = function (msg) {
+        this.dialogService.show({
+            content: msg,
+            icon: 'error',
+            size: 'sm',
+            showCancelButton: false
+        });
+    };
+    PersonalDocumentComponent.prototype.showConfirm = function (res, id) {
+        var _this = this;
+        this.dialogService.addDialog(__WEBPACK_IMPORTED_MODULE_6__confirm_confirm_component__["a" /* ConfirmComponent */], {
+            title: '确认?',
+            message: '是否保存当前文档?'
+        }).subscribe(function (isConfirmed) {
+            if (isConfirmed) {
+                _this.saveDoc();
+                _this.doCatchNewFile(res, id);
+            }
+            else {
+                _this.doCatchNewFile(res, id);
+            }
+        });
+    };
+    PersonalDocumentComponent.prototype.doCatchNewFile = function (res, id) {
+        this.objectId = res['id'];
+        this.rawData = res["content"]; //mark
+        this.showData = this.converter.makeHtml(this.rawData);
+        this.ifChanged = false;
+        this.id = id;
+    };
+    PersonalDocumentComponent.prototype.showSuccess = function (msg) {
+        this.dialogService.show({
+            content: msg,
+            icon: 'success',
+            size: 'sm',
+            timeout: 1000,
+            showCancelButton: false
+        });
+    };
+    ;
     PersonalDocumentComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-personal-document',
@@ -1090,12 +1320,23 @@ var DocumentService = /** @class */ (function () {
     function DocumentService(http) {
         this.http = http;
         this.createNewFileUrl = "api/createNewFile";
+        this.getDocUrl = "api/getDoc";
+        this.saveDocUrl = "api/saveDoc";
+        this.deleteDocUrl = "api/deleteDoc";
     }
     DocumentService.prototype.getNode = function () {
     };
+    DocumentService.prototype.deleteDoc = function (id) {
+        return this.http.delete(this.deleteDocUrl + "/" + id);
+    };
+    DocumentService.prototype.saveDoc = function (objectId, rawData) {
+        return this.http.post(this.saveDocUrl + "/" + objectId, rawData);
+    };
     DocumentService.prototype.createNewFile = function (obj) {
-        console.log(obj);
         return this.http.post(this.createNewFileUrl, obj);
+    };
+    DocumentService.prototype.getDoc = function (obj) {
+        return this.http.get(this.getDocUrl + "/" + obj);
     };
     DocumentService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
@@ -1361,7 +1602,7 @@ module.exports = ".tree-node{\r\n\tmargin-left: 1em;\r\n}\r\n\r\n.node-text{\r\n
 /***/ "./src/app/tree-root/tree-root.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let node of nodes\" id=\"node.id\" class=\"tree-node\" >\r\n\t<div style=\"display: inline-block;\">\r\n\t\t<span class=\"node-text\" [style.color]=\"colorDependOnType(node.type)\"\r\n\t\t\t(dblclick)=\"changeSelectedNode(node)\" (keyup)=\"changeName(node)\">\r\n\t\t\t> {{node.text}}\r\n\t\t</span>\r\n\t</div>\r\n\t<div *ngIf=\"isNotLast(node) && node.showChildren\">\r\n\t\t<app-tree-root  [nodes]=\"node.children\" (select)=\"selectc($event)\" [depth]=\"depth + 1\"></app-tree-root>\r\n\t</div>\r\n</div>"
+module.exports = "<div *ngFor=\"let node of nodes\" id=\"node.id\" class=\"tree-node\" >\r\n\t<div style=\"display: inline-block;\" *ngIf=\"!node.deleted\">\r\n\t\t<span class=\"node-text\" [style.color]=\"colorDependOnType(node.type)\"\r\n\t\t\t(dblclick)=\"changeSelectedNode(node)\" (keyup)=\"changeName(node)\">\r\n\t\t\t> {{node.text}}\r\n\t\t</span>\r\n\t</div>\r\n\t<div *ngIf=\"isNotLast(node) && node.showChildren\">\r\n\t\t<app-tree-root  [nodes]=\"node.children\" (select)=\"selectc($event)\" [depth]=\"depth + 1\"></app-tree-root>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -1371,8 +1612,6 @@ module.exports = "<div *ngFor=\"let node of nodes\" id=\"node.id\" class=\"tree-
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeRootComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__("./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1383,15 +1622,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-
 var TreeRootComponent = /** @class */ (function () {
     function TreeRootComponent() {
         this.depth = 0;
         this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
     }
     TreeRootComponent.prototype.ngOnInit = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(document).ready(function () {
-        });
     };
     TreeRootComponent.prototype.isNotLast = function (nd) {
         return nd.children != null && nd.children.length > 0;

@@ -1,3 +1,4 @@
+//完善个性化的话可以注册个类OnInit一下
 export const leftbutton:any = {
 	"name":"leftButton",
 	"minColumn":8,
@@ -35,30 +36,6 @@ export const leftbutton:any = {
 			"ifShow" : true,
 			"ifActive" : true,
 			"subButton":[
-				{
-					"id":"date",
-					"title":"财经日历",
-					"ifShow" : true,
-					"ifActive" : true,
-					"subButton":[],
-					"href":"personalTools"
-				},
-				{
-					"id":"date",
-					"title":"财经日历",
-					"ifShow" : true,
-					"ifActive" : true,
-					"subButton":[],
-					"href":"personalTools"
-				},
-				{
-					"id":"date",
-					"title":"财经日历",
-					"ifShow" : true,
-					"ifActive" : true,
-					"subButton":[],
-					"href":"personalTools"
-				},
 				{
 					"id":"date",
 					"title":"财经日历",

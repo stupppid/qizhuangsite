@@ -11,4 +11,5 @@ export class TreeNode{
 	zindex: number;
 	isRoot: boolean;
 	userSet: any[] = [];
+	deleted: boolean;
 }

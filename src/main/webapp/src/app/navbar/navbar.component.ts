@@ -49,4 +49,19 @@ export class NavbarComponent implements OnInit {
 	logOut(){
 		this.logOutInit.emit(true);
 	}
+	
+	test(){
+		var s = this.dialogService;
+		this.dialogService.show(<BuiltInOptions>{  
+						type: 'confirm',
+				        content: "test",
+				        icon: 'warning',
+				        size: 'sm',
+				        showCancelButton: true
+			      	})
+			      	
+	}
+	showa(a){
+		console.log(a)
+	}
 }
