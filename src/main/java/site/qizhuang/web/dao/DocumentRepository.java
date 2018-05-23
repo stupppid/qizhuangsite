@@ -22,7 +22,7 @@ public interface DocumentRepository extends JpaRepository<Document,Long> {
     int setPidAndObjectId(Long id,Long pid,String ObjectId);
 
     @Modifying
-    @Query(value = " UPDATE document SET is_deleted=true,text=CONCAT('DEL/',( " +
+    @Query(value = " UPDATE document SET is_deleted=true,text=CONCAT('DEL/',current_timestamp(),'/',( " +
             " select text from ( " +
             " select text from qizhuangsite.document where id= :id " +
             " ) t)) " +

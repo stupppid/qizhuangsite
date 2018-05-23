@@ -6,11 +6,15 @@
 	<button class="btn btn-outline-danger" style="font-size: 12px;" (click)="deleteDoc()">删除</button>
 	<button class="btn btn-outline-secondary" style="font-size: 12px;border-radius: 0;" (click)="saveDoc()">保存</button>
 </div>
-<div class="row" style="margin: 20px 0 -40px 0;height: inherit;">
-	<div class="col-6 " *ngIf="edit" id="textPanel">
-		<textarea class="form-control form-control-sm" [(ngModel)]="rawData" (input)="refreshHTML()"></textarea>
+<div class="row" style="margin: 20px 0 -30px 0;height: inherit;">
+	<div class="col-6 " *ngIf="edit" id="textPanel" style="margin-bottom: -40px;">
+		<textarea id="textArea" class="form-control form-control-sm" [style.height]="initHeight" style="min-height: 200px;"[(ngModel)]="rawData" (input)="refreshHTML()"></textarea>
+		<button class="btn btn-outline-light" (click)="expandTextArea()">下降{{row}}行</button>  
+		<button class="btn btn-outline-light" (click)="reduceTextArea()">上升{{row}}行</button>  
+		<input class="form-control-plaintext" style="display:inline-block;float:right;width: 40px;" type="number" max="99" min="1" [(ngModel)]="row"/>
 	</div>
-	<div [class]="showDataClass +' showPanel'"
+	<div [class]="showDataClass +' showPanel'" style="min-height: 200px;"
 		 id="htmlPanel" [innerHTML]="showData">
 	</div>
+	
 </div>

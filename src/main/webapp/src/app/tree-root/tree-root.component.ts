@@ -38,7 +38,7 @@ export class TreeRootComponent implements OnInit {
 		console.log(node)
 	}
 	changeName(node) {
-
+		
 	}
 	colorDependOnType(tp:string){
 		var specialStyle = "";

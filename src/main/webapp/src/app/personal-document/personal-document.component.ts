@@ -30,6 +30,19 @@ export class PersonalDocumentComponent implements OnInit {
 	ifChanged: boolean = true;
 	ifSelect:boolean;
 	defaultRawData:String = '#请从资源管理器选择一个文件';
+	row:number = 5;
+	rowHeight:number = 15;
+	initHeight:string = "450px";
+
+	expandTextArea(){
+		var height = this.row * this.rowHeight;
+		this.initHeight = $("#textPanel").height() + height - 40 + "px";
+	}
+	
+	reduceTextArea(){
+		var height = this.row * this.rowHeight;
+		this.initHeight = $("#textPanel").height() - height - 40  + "px";
+	}
 	
 	constructor(private dialogService: DialogService,
 		private dataService: DataService,

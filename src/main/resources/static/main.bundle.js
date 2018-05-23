@@ -245,6 +245,7 @@ var AppModule = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return leftbutton; });
+//完善个性化的话可以注册个类OnInit一下
 var leftbutton = {
     "name": "leftButton",
     "minColumn": 8,
@@ -282,30 +283,6 @@ var leftbutton = {
             "ifShow": true,
             "ifActive": true,
             "subButton": [
-                {
-                    "id": "date",
-                    "title": "财经日历",
-                    "ifShow": true,
-                    "ifActive": true,
-                    "subButton": [],
-                    "href": "personalTools"
-                },
-                {
-                    "id": "date",
-                    "title": "财经日历",
-                    "ifShow": true,
-                    "ifActive": true,
-                    "subButton": [],
-                    "href": "personalTools"
-                },
-                {
-                    "id": "date",
-                    "title": "财经日历",
-                    "ifShow": true,
-                    "ifActive": true,
-                    "subButton": [],
-                    "href": "personalTools"
-                },
                 {
                     "id": "date",
                     "title": "财经日历",
@@ -495,7 +472,7 @@ module.exports = ""
 /***/ "./src/app/leftbar/leftbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"\">\n\t<div class=\"card\">\n\t\t<a href=\"#\">\n\t\t\t<img class=\"card-img-top\" src=\"http://static.runoob.com/images/mix/img_avatar.png\" alt=\"My head\">\n\t\t</a>\n\t\t<span class=\"badge badge-dark\" style=\"border-radius: 0;\">奇状</span>\n\t</div>\n\t<div class=\"card\">\n\t\t<div *ngFor=\"let button of buttons\" class=\"btn-group-vertical\">\n\t\t\t<button *ngIf=\"button.ifShow\" class=\"btn btn-primary\" \n\t\t\t\tstyle=\"border-radius: 0;border-bottom:solid black 1px;\" \n\t\t\t\t(click)=\"goHref(button)\">\n\t\t\t\t{{button.title}}\n\t\t\t</button>\n\t\t\t<div id=\"{{button.id}}\" *ngIf=\"button.ifShow\" class=\"btn-group-vertical\" style=\"width: 100%;\">\n\t\t\t\t<div style=\"border-radius: 0;border-bottom:solid black 1px;width: 100%;\" \n\t\t\t\t\t*ngFor=\"let subbutton of button.subButton\" \n\t\t\t\t\t(click)=\"goHref(subbutton)\">\n\t\t\t\t\t<button class=\"btn btn-secondary\" \n\t\t\t\t\t\t*ngIf=\"subbutton.ifShow\"\n\t\t\t\t\t\tid=\"{{subbutton.id}}\" >\n\t\t\t\t\t\t{{subbutton.title}}\n\t\t\t\t\t</button>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>"
+module.exports = "<div style=\"\">\r\n\t<div class=\"card\">\r\n\t\t<a href=\"#\">\r\n\t\t\t<img class=\"card-img-top\" src=\"http://static.runoob.com/images/mix/img_avatar.png\" alt=\"My head\">\r\n\t\t</a>\r\n\t\t<span class=\"badge badge-dark\" style=\"border-radius: 0;\">奇状</span>\r\n\t</div>\r\n\t<div class=\"card\">\r\n\t\t<div *ngFor=\"let button of buttons\" class=\"btn-group-vertical\">\r\n\t\t\t<button *ngIf=\"button.ifShow\" class=\"btn btn-primary\" \r\n\t\t\t\tstyle=\"border-radius: 0;border-bottom:solid black 1px;\" \r\n\t\t\t\t(click)=\"goHref(button)\">\r\n\t\t\t\t{{button.title}}\r\n\t\t\t</button>\r\n\t\t\t<div id=\"{{button.id}}\" *ngIf=\"button.ifShow\" class=\"btn-group-vertical\" style=\"width: 100%;\">\r\n\t\t\t\t<div style=\"border-radius: 0;border-bottom:solid black 1px;width: 100%;\" \r\n\t\t\t\t\t*ngFor=\"let subbutton of button.subButton\" \r\n\t\t\t\t\t(click)=\"goHref(subbutton)\">\r\n\t\t\t\t\t<button class=\"btn btn-secondary\" \r\n\t\t\t\t\t\t*ngIf=\"subbutton.ifShow\"\r\n\t\t\t\t\t\tid=\"{{subbutton.id}}\" >\r\n\t\t\t\t\t\t{{subbutton.title}}\r\n\t\t\t\t\t</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -590,7 +567,7 @@ module.exports = ".itemheight{\r\n\theight: 44px;\r\n}\r\n\r\n.banner{\r\n\tposi
 /***/ "./src/app/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"navbar navbar-expand-sm bg-dark navbar-dark row\">\r\n\t<div class=\"navbar-brand col-sm-3 itemheight\">\r\n\t\t<div class=\"bgRound\"></div>\n\t\t<img class=\"banner\" src=\"../../assets/favicon.gif\" alt=\"Logo\"/>\r\n\t</div>\r\n\t\r\n\t<div class=\"navbar-nav col-sm-7 itemheight\">\n\t\t<div class=\"nav-item btn-group\">\r\n\t\t\t<button class=\"btn btn-dark\" (click)=\"test()\">管家</button>\r\n\t\t\t<button class=\"btn btn-dark\" (click)=\"signUp()\">注册</button>\r\n\t\t\t<button *ngIf = \"!ifSignIn\" class=\"btn btn-dark\" (click)=\"signIn()\">登录</button>\r\n\t\t\t<button *ngIf = \"ifSignIn\" class=\"btn btn-dark\" (click)=\"logOut()\">退出登录</button>\r\n\t\t</div>\n\t</div>\r\n\t<div class=\"navbar-nav col-sm-2 itemheight\">\n\t\t<div class=\"nav-item input-group\">\r\n\t\t\t<input class=\"form-control\" style=\"height: 44px;\" type=\"text\" name=\"search\" id=\"search\"/>\r\n\t\t\t<div class=\"input-group-addon btn btn-light\" style=\"border-radius:0 4px 4px 0;\">\n\t\t\t\t<img style=\"height: 30px;margin-right: -3px;\" src=\"../../assets/search.gif\" alt=\"Search\"/>\n\t\t\t</div>\r\n\t\t</div>\n\t</div>\r\n</div>"
+module.exports = "<div class=\"navbar navbar-expand-sm bg-dark navbar-dark row\">\r\n\t<div class=\"navbar-brand col-sm-3 itemheight\">\r\n\t\t<div class=\"bgRound\"></div>\r\n\t\t<img class=\"banner\" src=\"../../assets/favicon.gif\" alt=\"Logo\"/>\r\n\t</div>\r\n\t\r\n\t<div class=\"navbar-nav col-sm-7 itemheight\">\r\n\t\t<div class=\"nav-item btn-group\">\r\n\t\t\t<button class=\"btn btn-dark\" (click)=\"test()\">管家</button>\r\n\t\t\t<button class=\"btn btn-dark\" (click)=\"signUp()\">注册</button>\r\n\t\t\t<button *ngIf = \"!ifSignIn\" class=\"btn btn-dark\" (click)=\"signIn()\">登录</button>\r\n\t\t\t<button *ngIf = \"ifSignIn\" class=\"btn btn-dark\" (click)=\"logOut()\">退出登录</button>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"navbar-nav col-sm-2 itemheight\">\r\n\t\t<div class=\"nav-item input-group\">\r\n\t\t\t<input class=\"form-control\" style=\"height: 44px;\" type=\"text\" name=\"search\" id=\"search\"/>\r\n\t\t\t<div class=\"input-group-addon btn btn-light\" style=\"border-radius:0 4px 4px 0;\">\r\n\t\t\t\t<img style=\"height: 30px;margin-right: -3px;\" src=\"../../assets/search.gif\" alt=\"Search\"/>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -941,7 +918,7 @@ module.exports = ".showPanel{\r\n\tmax-width: 58em;\r\n\tword-break:break-all;\r
 /***/ "./src/app/personal-document/personal-document.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-document-tree style=\"position: absolute;z-index:100;left: 0;top: 0;\" [nodes]=\"nodes\" (selectc)=\"select($event)\">\n</app-document-tree>\n<div class=\"btn-group\" style=\"position: absolute;height:30px;right: 15px;top: 0px;\">\n\t<button class=\"btn btn-outline-secondary\" style=\"font-size: 12px;border-radius: 0 ;\" (click)=\"editDoc()\">编辑</button>\n\t<button class=\"btn btn-outline-primary\" style=\"font-size: 12px;\" (click)=\"newDoc()\">新建</button>\n\t<button class=\"btn btn-outline-danger\" style=\"font-size: 12px;\" (click)=\"deleteDoc()\">删除</button>\r\n\t<button class=\"btn btn-outline-secondary\" style=\"font-size: 12px;border-radius: 0;\" (click)=\"saveDoc()\">保存</button>\n</div>\n<div class=\"row\" style=\"margin: 20px 0 -40px 0;height: inherit;\">\r\n\t<div class=\"col-6 \" *ngIf=\"edit\" id=\"textPanel\">\r\n\t\t<textarea class=\"form-control form-control-sm\" [(ngModel)]=\"rawData\" (input)=\"refreshHTML()\"></textarea>\r\n\t</div>\r\n\t<div [class]=\"showDataClass +' showPanel'\"\r\n\t\t id=\"htmlPanel\" [innerHTML]=\"showData\">\r\n\t</div>\r\n</div>"
+module.exports = "<app-document-tree style=\"position: absolute;z-index:100;left: 0;top: 0;\" [nodes]=\"nodes\" (selectc)=\"select($event)\">\r\n</app-document-tree>\r\n<div class=\"btn-group\" style=\"position: absolute;height:30px;right: 15px;top: 0px;\">\r\n\t<button class=\"btn btn-outline-secondary\" style=\"font-size: 12px;border-radius: 0 ;\" (click)=\"editDoc()\">编辑</button>\r\n\t<button class=\"btn btn-outline-primary\" style=\"font-size: 12px;\" (click)=\"newDoc()\">新建</button>\r\n\t<button class=\"btn btn-outline-danger\" style=\"font-size: 12px;\" (click)=\"deleteDoc()\">删除</button>\r\n\t<button class=\"btn btn-outline-secondary\" style=\"font-size: 12px;border-radius: 0;\" (click)=\"saveDoc()\">保存</button>\r\n</div>\r\n<div class=\"row\" style=\"margin: 20px 0 -30px 0;height: inherit;\">\r\n\t<div class=\"col-6 \" *ngIf=\"edit\" id=\"textPanel\" style=\"margin-bottom: -40px;\">\r\n\t\t<textarea id=\"textArea\" class=\"form-control form-control-sm\" [style.height]=\"initHeight\" style=\"min-height: 200px;\"[(ngModel)]=\"rawData\" (input)=\"refreshHTML()\"></textarea>\r\n\t\t<button class=\"btn btn-outline-light\" (click)=\"expandTextArea()\">下降{{row}}行</button>  \r\n\t\t<button class=\"btn btn-outline-light\" (click)=\"reduceTextArea()\">上升{{row}}行</button>  \r\n\t\t<input class=\"form-control-plaintext\" style=\"display:inline-block;float:right;width: 40px;\" type=\"number\" max=\"99\" min=\"1\" [(ngModel)]=\"row\"/>\r\n\t</div>\r\n\t<div [class]=\"showDataClass +' showPanel'\" style=\"min-height: 200px;\"\r\n\t\t id=\"htmlPanel\" [innerHTML]=\"showData\">\r\n\t</div>\r\n\t\r\n</div>"
 
 /***/ }),
 
@@ -983,7 +960,18 @@ var PersonalDocumentComponent = /** @class */ (function () {
         this.edit = false;
         this.ifChanged = true;
         this.defaultRawData = '#请从资源管理器选择一个文件';
+        this.row = 5;
+        this.rowHeight = 15;
+        this.initHeight = "450px";
     }
+    PersonalDocumentComponent.prototype.expandTextArea = function () {
+        var height = this.row * this.rowHeight;
+        this.initHeight = __WEBPACK_IMPORTED_MODULE_1_jquery__("#textPanel").height() + height - 40 + "px";
+    };
+    PersonalDocumentComponent.prototype.reduceTextArea = function () {
+        var height = this.row * this.rowHeight;
+        this.initHeight = __WEBPACK_IMPORTED_MODULE_1_jquery__("#textPanel").height() - height - 40 + "px";
+    };
     PersonalDocumentComponent.prototype.ngOnInit = function () {
         this.freshTree();
         this.rawData = this.defaultRawData;
@@ -1174,7 +1162,7 @@ var PersonalDocumentComponent = /** @class */ (function () {
     };
     PersonalDocumentComponent.prototype.doCatchNewFile = function (res, id) {
         this.objectId = res['id'];
-        this.rawData = res["content"]; //mark
+        this.rawData = res["content"];
         this.showData = this.converter.makeHtml(this.rawData);
         this.ifChanged = false;
         this.id = id;
@@ -1216,7 +1204,7 @@ module.exports = ""
 /***/ "./src/app/personal-tools/personal-tools.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h2>模态框实例</h2>\n  <!-- 按钮：用于打开模态框 -->\n  <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#myModal\">\n    打开模态框\n  </button>\n   \n  <!-- 模态框 -->\n  <!--<div class=\"modal\" id=\"myModal\">-->\n    <!--<div class=\"modal-dialog\" id=\"myModal\">-->\n      <div class=\"modal-content\">\n   \n        <!-- 模态框头部 -->\n        <div class=\"modal-header\">\n          <h4 class=\"modal-title\">模态框头部</h4>\n          <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n        </div>\n   \n        <!-- 模态框主体 -->\n        <div class=\"modal-body\">\n          模态框内容..\n        </div>\n   \n        <!-- 模态框底部 -->\n        <div class=\"modal-footer\">\n          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">关闭</button>\n\t\t  </div>\n      </div>\n    <!--</div>-->\n  <!--</div>-->\n  \n</div>"
+module.exports = "个人工具"
 
 /***/ }),
 
@@ -1595,7 +1583,7 @@ var SignUpDialogComponent = /** @class */ (function (_super) {
 /***/ "./src/app/tree-root/tree-root.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".tree-node{\r\n\tmargin-left: 1em;\r\n}\r\n\r\n.node-text{\r\n\twhite-space:nowrap;overflow: scroll;cursor: pointer;\r\n\tfont:13px futura;\r\n\ttransition: color 0.5s;\r\n\t-moz-transition: color 0.5s;\r\n\t-webkit-transition: color 0.5s;\r\n\t-o-transition:color 0.5s;\r\n\t -webkit-user-select:none; \r\n\t -moz-user-select:none; \r\n\t -ms-user-select:none; \r\n\t user-select:none;\r\n}\r\n\r\n.node-text:hover{\r\n\tcolor: limegreen;\r\n}\r\n\r\n.textBlue{\r\n\tcolor:lightblue;\r\n}\r\n\r\n.textWhite{\r\n\tcolor: white;\r\n}\r\n"
+module.exports = ".tree-node{\r\n\tmargin-left: 1em;\r\n}\r\n\r\n.node-text{\r\n\twhite-space:nowrap;overflow: scroll;cursor: pointer;\r\n\tfont:13px futura;\r\n\ttransition: color 0.5s;\r\n\t-moz-transition: color 0.5s;\r\n\t-webkit-transition: color 0.5s;\r\n\t-o-transition:color 0.5s;\r\n\t -webkit-user-select:none; \r\n\t -moz-user-select:none; \r\n\t -ms-user-select:none; \r\n\t user-select:none;\r\n}\r\n\r\n.textBlue{\r\n\tcolor:lightblue;\r\n}\r\n\r\n.textWhite{\r\n\tcolor: white;\r\n}\r\n"
 
 /***/ }),
 
