@@ -5,7 +5,7 @@
 			<button type="button" class="close" (click)="close()">&times;</button>
 		</div>
 		<div class="modal-body">
-			<label for="path">新建文件：</label>
+			<label for="path">{{title}}：</label>
 			<input type="text" id="path" class="form-control" (keyup)="changePath($event)" [(ngModel)]="newFilePath" />
 			<div *ngIf="selectedNode != null">
 				<div *ngFor="let nd of selectedNode.children" class="btn-group">
@@ -16,7 +16,7 @@
 			<div class="btn-group" #dropdown="bs-dropdown" dropdown>
 				<button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
         		类型<span class="caret"></span>
-      </button> &nbsp;&nbsp;&nbsp;
+      			</button> &nbsp;&nbsp;&nbsp;
 				<ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
 					<li *ngFor="let t of allTypes" role="menuitem">
 						<button class="dropdown-item" (click)="dropdown.hide();type=t;">{{t}}</button>
@@ -24,10 +24,10 @@
 				</ul>
 			</div>
 			<span>
-      	{{type}}
-    </span>
+		      	{{type}}
+		    </span>
 			<div *ngIf="type==allTypes[1]">
-				<label class="alert-info">标题 <input class="form-control" [(ngModel)]="text" type="text"/></label><br />
+				<label class="alert-info">标题 <input class="form-control" disabled="disabled" [placeholder]="findTextFromPath()" [(ngModel)]="text" type="text"/></label><br />
 				<label style="width: 100%;" class="alert-info">简介 <input class="form-control" [(ngModel)]="profile"  type="text"/></label>
 			</div>
 		</div>

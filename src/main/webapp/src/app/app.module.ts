@@ -18,10 +18,12 @@ import { TreeRootComponent } from './tree-root/tree-root.component';
 import { NewFileDialogComponent } from './new-file-dialog/new-file-dialog.component';
 import { SignUpDialogComponent } from './sign-up-dialog/sign-up-dialog.component'; 
 import { ConfirmComponent } from './confirm/confirm.component';
+import { RefactorFileDialogComponent } from './refactor-file-dialog/refactor-file-dialog.component';
 
 import { DocumentService } from './service/document.service';
 import { UserService } from './service/user.service';
 import { DataService } from './service/data.service';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { DataService } from './service/data.service';
     TreeRootComponent,
     NewFileDialogComponent,
     SignUpDialogComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    RefactorFileDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,8 @@ import { DataService } from './service/data.service';
   entryComponents: [
     NewFileDialogComponent,
     SignUpDialogComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    RefactorFileDialogComponent
 	],
   providers: [
   	DocumentService,

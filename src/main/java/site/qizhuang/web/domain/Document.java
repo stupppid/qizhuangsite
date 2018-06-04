@@ -12,8 +12,8 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String objectId;
-    private Date createTime = new Date();
-    private Date changeTime = new Date();
+    private Date createTime;
+    private Date changeTime;
     @Column(nullable = false)
     private String type;  //文件夹 ，个人文档，共享
     private boolean isDeleted = false;
@@ -111,7 +111,6 @@ public class Document {
     public void setType(String type) {
         this.type = type;
     }
-
 
     public String getProfile() {
         return profile;

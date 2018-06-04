@@ -7,6 +7,7 @@ import { NewFileDialogComponent } from '../new-file-dialog/new-file-dialog.compo
 import { DataService } from '../service/data.service';
 import { DocumentService } from '../service/document.service';
 import { ConfirmComponent } from '../confirm/confirm.component';
+import { RefactorFileDialogComponent } from '../refactor-file-dialog/refactor-file-dialog.component';
 
 declare var require: any;
 
@@ -33,6 +34,7 @@ export class PersonalDocumentComponent implements OnInit {
 	row:number = 5;
 	rowHeight:number = 15;
 	initHeight:string = "450px";
+	tempPath : string = "";
 
 	expandTextArea(){
 		var height = this.row * this.rowHeight;
@@ -165,7 +167,24 @@ export class PersonalDocumentComponent implements OnInit {
 					continue;
 				}
 			}else{
-				return null;
+				continue;
+			}
+		}
+	}
+	
+	getTreeNodeTextPath(id:number,nodes:TreeNode[]){
+		for(var nd in nodes){
+			if(nodes[nd]["id"] == id){
+				return nodes[nd]["text"];
+			}else if(nodes[nd]["children"]!= null && nodes[nd]["children"].length > 0){
+				var q = this.getTreeNodeTextPath(id,nodes[nd]["children"]);
+				if(q != null){
+					return nodes[nd]["text"] + '/' + q;
+				}else{
+					continue;
+				}
+			}else{
+				continue;
 			}
 		}
 	}
@@ -252,4 +271,23 @@ export class PersonalDocumentComponent implements OnInit {
 		});
 	};
 	
+	refactor(nd:TreeNode){
+		var id = this.dataService.user["id"];
+		var oldPath1 = this.getTreeNodeTextPath(nd['id'],this.nodes);
+		this.tempPath = '';
+		this.dialogService.addDialog(RefactorFileDialogComponent, {
+			title: '移动文件',
+			message: '移动文件',
+			nodes: this.nodes,
+			oldPath : oldPath1,
+			selectedNode: nd,
+			userId: id
+		}).subscribe((obj) => {
+			if(obj != null) {
+				this.freshTree();
+			}else{
+				this.showError("移动失败!");
+			}
+		});
+	}
 }

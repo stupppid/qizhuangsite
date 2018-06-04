@@ -9,7 +9,7 @@ export class DocumentService {
 	getDocUrl: string = "api/getDoc";
 	saveDocUrl: string = "api/saveDoc";
 	deleteDocUrl: string = "api/deleteDoc";
-	
+	refactorDocUrl :string = 'api/refactorDoc';
 
 	constructor(private http: HttpClient) {}
 
@@ -31,5 +31,9 @@ export class DocumentService {
 	
 	getDoc(obj:String):Observable<String>{
 		return this.http.get<String>(this.getDocUrl + "/" + obj);
+	}
+	
+	refactorDoc(rawData){
+		return this.http.post<any>(this.refactorDocUrl, rawData);
 	}
 }

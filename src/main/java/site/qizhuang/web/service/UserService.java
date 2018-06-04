@@ -26,9 +26,6 @@ public class UserService {
     @Autowired
     private DocumentRepository documentRepository;
 
-    @Autowired
-    private DocumentService documentService;
-
     public SignUpDto signUp(SignUpAndInDto signUpAndInDto){
         int check = -1;
         try {
@@ -61,10 +58,24 @@ public class UserService {
             return userWithAllDto;
         }
         User user = optionalUser.get();
-        Set<Document> rootDocuments = DocumentService.findRootDocumentsFromAll(user.getDocumentSet());
+        Set<Document> rootDocuments = this.findRootDocumentsFromAll(user.getDocumentSet());
         userWithAllDto.setUser(user);
         userWithAllDto.setDocuments(rootDocuments);
         userWithAllDto.setErrorMsg("");
         return userWithAllDto;
+    }
+
+    public Set<Document> findRootDocumentsFromAll(Set<Document> documents){
+        Set<Document> rootDocuments = new HashSet<>();
+        try {
+            for (Document d:documents) {
+                if(d.isRoot()){
+                    rootDocuments.add(d);
+                }
+            }
+        }catch (Exception e){
+            log.warn(e);
+        }
+        return rootDocuments;
     }
 }

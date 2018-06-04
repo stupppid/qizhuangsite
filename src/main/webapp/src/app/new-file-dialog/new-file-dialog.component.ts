@@ -91,22 +91,27 @@ export class NewFileDialogComponent extends DialogComponent < newFileModel, null
 	
 	ensure(){
 		var r = /([\s\\]|\/{2,})/;
+		var tmp = this.newFilePath.split("/");
+		var maxLength = 42;
 		if(this.type == ""){
 			this.showError("类型是必填项!");
 		}else if(this.newFilePath == ""){
 			this.showError("文件路径是必填项");
 		}else if(r.test(this.newFilePath)){
 			this.showError("文件路径不能有空格,回车,Tab,\或连续/");
-		}else{
+		}else if(tmp[tmp.length-1].length > maxLength){
+			this.showError("文件名不能超过"+ maxLength + "个字符");
+		}
+		else{
 			this.checkPath();
 			if(this.pList.length == 0){
-				this.showError("请检查文件路径最后是否有文件名");
+				this.showError("请检查文件路径最后是否有文件名,或者已有该文件路径");
 				return;
 			}
 			this.obj = {
 				"path":this.pList,
 				"type":this.type,
-				"title":this.text,
+				"title":this.findTextFromPath(),
 				"profile":this.profile,
 				"userId":this.userId,
 				"pid":this.pid
@@ -131,6 +136,7 @@ export class NewFileDialogComponent extends DialogComponent < newFileModel, null
 			}
 		}
 		var num = 0;
+		this.nowParent = this.dataService.documents;
 		for(let a in pathList){
 				var ifFind:boolean = false;
 				if(nowPath1.length > 0){
@@ -138,13 +144,16 @@ export class NewFileDialogComponent extends DialogComponent < newFileModel, null
 						if(nowPath1[cnowPath]["text"] == pathList[a]){
 							ifFind = true;
 							this.pid = nowPath1[cnowPath]["id"];
+							if(nowPath1[cnowPath].children == null){
+								let t:TreeNode[] = [];
+								nowPath1[cnowPath].children = t;
+							}
 							nowPath1 = nowPath1[cnowPath].children;
 							this.nowParent = nowPath1;
 							break;
 						}
 					}
 				}else{
-					this.nowParent = this.dataService.documents;
 					break;
 				}
 				if(!ifFind){
@@ -153,8 +162,13 @@ export class NewFileDialogComponent extends DialogComponent < newFileModel, null
 					++num;
 				}
 		}
-		if(num<(pathList.length)){
-			this.pList = pathList.slice(num,pathList.length);
+		if(num<=(pathList.length)){
+			this.pList = pathList.slice(num);
 		}
+	}
+	
+	findTextFromPath(){
+		var pathNames = this.newFilePath.split("/");
+		return pathNames[pathNames.length-1];
 	}
 }

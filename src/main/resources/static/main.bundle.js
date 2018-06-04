@@ -162,15 +162,17 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__new_file_dialog_new_file_dialog_component__ = __webpack_require__("./src/app/new-file-dialog/new-file-dialog.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__sign_up_dialog_sign_up_dialog_component__ = __webpack_require__("./src/app/sign-up-dialog/sign-up-dialog.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__confirm_confirm_component__ = __webpack_require__("./src/app/confirm/confirm.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__service_document_service__ = __webpack_require__("./src/app/service/document.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__service_user_service__ = __webpack_require__("./src/app/service/user.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__service_data_service__ = __webpack_require__("./src/app/service/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__refactor_file_dialog_refactor_file_dialog_component__ = __webpack_require__("./src/app/refactor-file-dialog/refactor-file-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__service_document_service__ = __webpack_require__("./src/app/service/document.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__service_user_service__ = __webpack_require__("./src/app/service/user.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__service_data_service__ = __webpack_require__("./src/app/service/data.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -209,7 +211,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_15__tree_root_tree_root_component__["a" /* TreeRootComponent */],
                 __WEBPACK_IMPORTED_MODULE_16__new_file_dialog_new_file_dialog_component__["a" /* NewFileDialogComponent */],
                 __WEBPACK_IMPORTED_MODULE_17__sign_up_dialog_sign_up_dialog_component__["a" /* SignUpDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_18__confirm_confirm_component__["a" /* ConfirmComponent */]
+                __WEBPACK_IMPORTED_MODULE_18__confirm_confirm_component__["a" /* ConfirmComponent */],
+                __WEBPACK_IMPORTED_MODULE_19__refactor_file_dialog_refactor_file_dialog_component__["a" /* RefactorFileDialogComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -223,12 +226,13 @@ var AppModule = /** @class */ (function () {
             entryComponents: [
                 __WEBPACK_IMPORTED_MODULE_16__new_file_dialog_new_file_dialog_component__["a" /* NewFileDialogComponent */],
                 __WEBPACK_IMPORTED_MODULE_17__sign_up_dialog_sign_up_dialog_component__["a" /* SignUpDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_18__confirm_confirm_component__["a" /* ConfirmComponent */]
+                __WEBPACK_IMPORTED_MODULE_18__confirm_confirm_component__["a" /* ConfirmComponent */],
+                __WEBPACK_IMPORTED_MODULE_19__refactor_file_dialog_refactor_file_dialog_component__["a" /* RefactorFileDialogComponent */]
             ],
             providers: [
-                __WEBPACK_IMPORTED_MODULE_19__service_document_service__["a" /* DocumentService */],
-                __WEBPACK_IMPORTED_MODULE_20__service_user_service__["a" /* UserService */],
-                __WEBPACK_IMPORTED_MODULE_21__service_data_service__["a" /* DataService */]
+                __WEBPACK_IMPORTED_MODULE_20__service_document_service__["a" /* DocumentService */],
+                __WEBPACK_IMPORTED_MODULE_21__service_user_service__["a" /* UserService */],
+                __WEBPACK_IMPORTED_MODULE_22__service_data_service__["a" /* DataService */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* AppComponent */]]
         })
@@ -373,7 +377,7 @@ module.exports = ".document-node{\r\n\topacity: 0;\r\n\tcolor: #FFFFFF;\r\n\ttra
 /***/ "./src/app/document-tree/document-tree.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"document-tree\" class=\"document-background\">\r\n\t<app-tree-root class=\"document-node\" (select)=\"select2($event)\" [nodes]=\"nodes\" id=\"nodeRoot\"></app-tree-root>\r\n\t<div class=\"badge badge-dark\" style=\"width: 100%;cursor: pointer;border-top: solid 1px black;\" (click)=\"hideDocumentTree()\">\r\n\t\t<span style=\"float: left;\" id=\"hideString\">\r\n\t\t</span>\r\n\t</div>\r\n</div>\r\n"
+module.exports = "<div class=\"document-tree\" class=\"document-background\">\r\n\t<app-tree-root class=\"document-node\" (select)=\"select2($event)\" (refactor)=\"crefactor($event)\" [nodes]=\"nodes\" id=\"nodeRoot\"></app-tree-root>\r\n\t<div class=\"badge badge-dark\" style=\"width: 100%;cursor: pointer;border-top: solid 1px black;\" (click)=\"hideDocumentTree()\">\r\n\t\t<span style=\"float: left;\" id=\"hideString\">\r\n\t\t</span>\r\n\t</div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -400,6 +404,7 @@ var DocumentTreeComponent = /** @class */ (function () {
     function DocumentTreeComponent() {
         this.ifDocumentTreeHide = true;
         this.selectc = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.refactor = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this.hideString = "隐藏";
         this.showString = "资源管理器";
     }
@@ -421,10 +426,17 @@ var DocumentTreeComponent = /** @class */ (function () {
     DocumentTreeComponent.prototype.select2 = function (nd) {
         this.selectc.emit(nd);
     };
+    DocumentTreeComponent.prototype.crefactor = function (nd) {
+        this.refactor.emit(nd);
+    };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
         __metadata("design:type", Object)
     ], DocumentTreeComponent.prototype, "selectc", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+        __metadata("design:type", Object)
+    ], DocumentTreeComponent.prototype, "refactor", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", Array)
@@ -472,7 +484,7 @@ module.exports = ""
 /***/ "./src/app/leftbar/leftbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"\">\r\n\t<div class=\"card\">\r\n\t\t<a href=\"#\">\r\n\t\t\t<img class=\"card-img-top\" src=\"http://static.runoob.com/images/mix/img_avatar.png\" alt=\"My head\">\r\n\t\t</a>\r\n\t\t<span class=\"badge badge-dark\" style=\"border-radius: 0;\">奇状</span>\r\n\t</div>\r\n\t<div class=\"card\">\r\n\t\t<div *ngFor=\"let button of buttons\" class=\"btn-group-vertical\">\r\n\t\t\t<button *ngIf=\"button.ifShow\" class=\"btn btn-primary\" \r\n\t\t\t\tstyle=\"border-radius: 0;border-bottom:solid black 1px;\" \r\n\t\t\t\t(click)=\"goHref(button)\">\r\n\t\t\t\t{{button.title}}\r\n\t\t\t</button>\r\n\t\t\t<div id=\"{{button.id}}\" *ngIf=\"button.ifShow\" class=\"btn-group-vertical\" style=\"width: 100%;\">\r\n\t\t\t\t<div style=\"border-radius: 0;border-bottom:solid black 1px;width: 100%;\" \r\n\t\t\t\t\t*ngFor=\"let subbutton of button.subButton\" \r\n\t\t\t\t\t(click)=\"goHref(subbutton)\">\r\n\t\t\t\t\t<button class=\"btn btn-secondary\" \r\n\t\t\t\t\t\t*ngIf=\"subbutton.ifShow\"\r\n\t\t\t\t\t\tid=\"{{subbutton.id}}\" >\r\n\t\t\t\t\t\t{{subbutton.title}}\r\n\t\t\t\t\t</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n</div>"
+module.exports = "<div style=\"\">\r\n\t<div class=\"card\">\r\n\t\t<a href=\"#\">\r\n\t\t\t<img class=\"card-img-top\" src=\"../../assets/default.jpg\" alt=\"My head\">\r\n\t\t</a>\r\n\t\t<span class=\"badge badge-dark\" style=\"border-radius: 0;\">奇状</span>\r\n\t</div>\r\n\t<div class=\"card\">\r\n\t\t<div *ngFor=\"let button of buttons\" class=\"btn-group-vertical\">\r\n\t\t\t<button *ngIf=\"button.ifShow\" class=\"btn btn-primary\" \r\n\t\t\t\tstyle=\"border-radius: 0;border-bottom:solid black 1px;\" \r\n\t\t\t\t(click)=\"goHref(button)\">\r\n\t\t\t\t{{button.title}}\r\n\t\t\t</button>\r\n\t\t\t<div id=\"{{button.id}}\" *ngIf=\"button.ifShow\" class=\"btn-group-vertical\" style=\"width: 100%;\">\r\n\t\t\t\t<div style=\"border-radius: 0;border-bottom:solid black 1px;width: 100%;\" \r\n\t\t\t\t\t*ngFor=\"let subbutton of button.subButton\" \r\n\t\t\t\t\t(click)=\"goHref(subbutton)\">\r\n\t\t\t\t\t<button class=\"btn btn-secondary\" \r\n\t\t\t\t\t\t*ngIf=\"subbutton.ifShow\"\r\n\t\t\t\t\t\tid=\"{{subbutton.id}}\" >\r\n\t\t\t\t\t\t{{subbutton.title}}\r\n\t\t\t\t\t</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -680,7 +692,7 @@ module.exports = ""
 /***/ "./src/app/new-file-dialog/new-file-dialog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal-dialog\">\r\n\t<div class=\"modal-content\">\r\n\t\t<div class=\"modal-header\">\r\n\t\t\t<h4 class=\"modal-title\">{{title}}</h4>\r\n\t\t\t<button type=\"button\" class=\"close\" (click)=\"close()\">&times;</button>\r\n\t\t</div>\r\n\t\t<div class=\"modal-body\">\r\n\t\t\t<label for=\"path\">新建文件：</label>\r\n\t\t\t<input type=\"text\" id=\"path\" class=\"form-control\" (keyup)=\"changePath($event)\" [(ngModel)]=\"newFilePath\" />\r\n\t\t\t<div *ngIf=\"selectedNode != null\">\r\n\t\t\t\t<div *ngFor=\"let nd of selectedNode.children\" class=\"btn-group\">\r\n\t\t\t\t\t<button class=\"btn btn-outline-info\" *ngIf=\"ifButtonShow(nd)\" (click)=\"addPath(nd)\">{{nd.text}}</button>&nbsp;\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<hr />\r\n\t\t\t<div class=\"btn-group\" #dropdown=\"bs-dropdown\" dropdown>\r\n\t\t\t\t<button id=\"button-basic\" dropdownToggle type=\"button\" class=\"btn btn-primary dropdown-toggle\" aria-controls=\"dropdown-basic\">\r\n        \t\t类型<span class=\"caret\"></span>\r\n      </button> &nbsp;&nbsp;&nbsp;\r\n\t\t\t\t<ul id=\"dropdown-basic\" *dropdownMenu class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"button-basic\">\r\n\t\t\t\t\t<li *ngFor=\"let t of allTypes\" role=\"menuitem\">\r\n\t\t\t\t\t\t<button class=\"dropdown-item\" (click)=\"dropdown.hide();type=t;\">{{t}}</button>\r\n\t\t\t\t\t</li>\r\n\t\t\t\t</ul>\r\n\t\t\t</div>\r\n\t\t\t<span>\r\n      \t{{type}}\r\n    </span>\r\n\t\t\t<div *ngIf=\"type==allTypes[1]\">\r\n\t\t\t\t<label class=\"alert-info\">标题 <input class=\"form-control\" [(ngModel)]=\"text\" type=\"text\"/></label><br />\r\n\t\t\t\t<label style=\"width: 100%;\" class=\"alert-info\">简介 <input class=\"form-control\" [(ngModel)]=\"profile\"  type=\"text\"/></label>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"modal-footer\">\r\n\t\t\t<button type=\"button\" class=\"btn btn-primary\" (click)=\"ensure()\">确定</button>\r\n\t\t\t<button type=\"button\" class=\"btn btn-default\" (click)=\"close()\">取消</button>\r\n\t\t</div>\r\n\t</div>\r\n</div>"
+module.exports = "<div class=\"modal-dialog\">\r\n\t<div class=\"modal-content\">\r\n\t\t<div class=\"modal-header\">\r\n\t\t\t<h4 class=\"modal-title\">{{title}}</h4>\r\n\t\t\t<button type=\"button\" class=\"close\" (click)=\"close()\">&times;</button>\r\n\t\t</div>\r\n\t\t<div class=\"modal-body\">\r\n\t\t\t<label for=\"path\">{{title}}：</label>\r\n\t\t\t<input type=\"text\" id=\"path\" class=\"form-control\" (keyup)=\"changePath($event)\" [(ngModel)]=\"newFilePath\" />\r\n\t\t\t<div *ngIf=\"selectedNode != null\">\r\n\t\t\t\t<div *ngFor=\"let nd of selectedNode.children\" class=\"btn-group\">\r\n\t\t\t\t\t<button class=\"btn btn-outline-info\" *ngIf=\"ifButtonShow(nd)\" (click)=\"addPath(nd)\">{{nd.text}}</button>&nbsp;\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<hr />\r\n\t\t\t<div class=\"btn-group\" #dropdown=\"bs-dropdown\" dropdown>\r\n\t\t\t\t<button id=\"button-basic\" dropdownToggle type=\"button\" class=\"btn btn-primary dropdown-toggle\" aria-controls=\"dropdown-basic\">\r\n        \t\t类型<span class=\"caret\"></span>\r\n      \t\t\t</button> &nbsp;&nbsp;&nbsp;\r\n\t\t\t\t<ul id=\"dropdown-basic\" *dropdownMenu class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"button-basic\">\r\n\t\t\t\t\t<li *ngFor=\"let t of allTypes\" role=\"menuitem\">\r\n\t\t\t\t\t\t<button class=\"dropdown-item\" (click)=\"dropdown.hide();type=t;\">{{t}}</button>\r\n\t\t\t\t\t</li>\r\n\t\t\t\t</ul>\r\n\t\t\t</div>\r\n\t\t\t<span>\r\n\t\t      \t{{type}}\r\n\t\t    </span>\r\n\t\t\t<div *ngIf=\"type==allTypes[1]\">\r\n\t\t\t\t<label class=\"alert-info\">标题 <input class=\"form-control\" disabled=\"disabled\" [placeholder]=\"findTextFromPath()\" [(ngModel)]=\"text\" type=\"text\"/></label><br />\r\n\t\t\t\t<label style=\"width: 100%;\" class=\"alert-info\">简介 <input class=\"form-control\" [(ngModel)]=\"profile\"  type=\"text\"/></label>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"modal-footer\">\r\n\t\t\t<button type=\"button\" class=\"btn btn-primary\" (click)=\"ensure()\">确定</button>\r\n\t\t\t<button type=\"button\" class=\"btn btn-default\" (click)=\"close()\">取消</button>\r\n\t\t</div>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -771,6 +783,8 @@ var NewFileDialogComponent = /** @class */ (function (_super) {
     NewFileDialogComponent.prototype.ensure = function () {
         var _this = this;
         var r = /([\s\\]|\/{2,})/;
+        var tmp = this.newFilePath.split("/");
+        var maxLength = 42;
         if (this.type == "") {
             this.showError("类型是必填项!");
         }
@@ -780,16 +794,19 @@ var NewFileDialogComponent = /** @class */ (function (_super) {
         else if (r.test(this.newFilePath)) {
             this.showError("文件路径不能有空格,回车,Tab,\或连续/");
         }
+        else if (tmp[tmp.length - 1].length > maxLength) {
+            this.showError("文件名不能超过" + maxLength + "个字符");
+        }
         else {
             this.checkPath();
             if (this.pList.length == 0) {
-                this.showError("请检查文件路径最后是否有文件名");
+                this.showError("请检查文件路径最后是否有文件名,或者已有该文件路径");
                 return;
             }
             this.obj = {
                 "path": this.pList,
                 "type": this.type,
-                "title": this.text,
+                "title": this.findTextFromPath(),
                 "profile": this.profile,
                 "userId": this.userId,
                 "pid": this.pid
@@ -813,6 +830,7 @@ var NewFileDialogComponent = /** @class */ (function (_super) {
             }
         }
         var num = 0;
+        this.nowParent = this.dataService.documents;
         for (var a in pathList) {
             var ifFind = false;
             if (nowPath1.length > 0) {
@@ -820,6 +838,10 @@ var NewFileDialogComponent = /** @class */ (function (_super) {
                     if (nowPath1[cnowPath]["text"] == pathList[a]) {
                         ifFind = true;
                         this.pid = nowPath1[cnowPath]["id"];
+                        if (nowPath1[cnowPath].children == null) {
+                            var t = [];
+                            nowPath1[cnowPath].children = t;
+                        }
                         nowPath1 = nowPath1[cnowPath].children;
                         this.nowParent = nowPath1;
                         break;
@@ -827,7 +849,6 @@ var NewFileDialogComponent = /** @class */ (function (_super) {
                 }
             }
             else {
-                this.nowParent = this.dataService.documents;
                 break;
             }
             if (!ifFind) {
@@ -837,9 +858,13 @@ var NewFileDialogComponent = /** @class */ (function (_super) {
                 ++num;
             }
         }
-        if (num < (pathList.length)) {
-            this.pList = pathList.slice(num, pathList.length);
+        if (num <= (pathList.length)) {
+            this.pList = pathList.slice(num);
         }
+    };
+    NewFileDialogComponent.prototype.findTextFromPath = function () {
+        var pathNames = this.newFilePath.split("/");
+        return pathNames[pathNames.length - 1];
     };
     NewFileDialogComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -918,7 +943,7 @@ module.exports = ".showPanel{\r\n\tmax-width: 58em;\r\n\tword-break:break-all;\r
 /***/ "./src/app/personal-document/personal-document.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-document-tree style=\"position: absolute;z-index:100;left: 0;top: 0;\" [nodes]=\"nodes\" (selectc)=\"select($event)\">\r\n</app-document-tree>\r\n<div class=\"btn-group\" style=\"position: absolute;height:30px;right: 15px;top: 0px;\">\r\n\t<button class=\"btn btn-outline-secondary\" style=\"font-size: 12px;border-radius: 0 ;\" (click)=\"editDoc()\">编辑</button>\r\n\t<button class=\"btn btn-outline-primary\" style=\"font-size: 12px;\" (click)=\"newDoc()\">新建</button>\r\n\t<button class=\"btn btn-outline-danger\" style=\"font-size: 12px;\" (click)=\"deleteDoc()\">删除</button>\r\n\t<button class=\"btn btn-outline-secondary\" style=\"font-size: 12px;border-radius: 0;\" (click)=\"saveDoc()\">保存</button>\r\n</div>\r\n<div class=\"row\" style=\"margin: 20px 0 -30px 0;height: inherit;\">\r\n\t<div class=\"col-6 \" *ngIf=\"edit\" id=\"textPanel\" style=\"margin-bottom: -40px;\">\r\n\t\t<textarea id=\"textArea\" class=\"form-control form-control-sm\" [style.height]=\"initHeight\" style=\"min-height: 200px;\"[(ngModel)]=\"rawData\" (input)=\"refreshHTML()\"></textarea>\r\n\t\t<button class=\"btn btn-outline-light\" (click)=\"expandTextArea()\">下降{{row}}行</button>  \r\n\t\t<button class=\"btn btn-outline-light\" (click)=\"reduceTextArea()\">上升{{row}}行</button>  \r\n\t\t<input class=\"form-control-plaintext\" style=\"display:inline-block;float:right;width: 40px;\" type=\"number\" max=\"99\" min=\"1\" [(ngModel)]=\"row\"/>\r\n\t</div>\r\n\t<div [class]=\"showDataClass +' showPanel'\" style=\"min-height: 200px;\"\r\n\t\t id=\"htmlPanel\" [innerHTML]=\"showData\">\r\n\t</div>\r\n\t\r\n</div>"
+module.exports = "<app-document-tree style=\"position: absolute;z-index:100;left: 0;top: 0;\" [nodes]=\"nodes\" (selectc)=\"select($event)\" (refactor)=\"refactor($event)\">\r\n</app-document-tree>\r\n<div class=\"btn-group\" style=\"position: absolute;height:30px;right: 15px;top: 0px;\">\r\n\t<button class=\"btn btn-outline-secondary\" style=\"font-size: 12px;border-radius: 0 ;\" (click)=\"editDoc()\">编辑</button>\r\n\t<button class=\"btn btn-outline-primary\" style=\"font-size: 12px;\" (click)=\"newDoc()\">新建</button>\r\n\t<button class=\"btn btn-outline-danger\" style=\"font-size: 12px;\" (click)=\"deleteDoc()\">删除</button>\r\n\t<button class=\"btn btn-outline-secondary\" style=\"font-size: 12px;border-radius: 0;\" (click)=\"saveDoc()\">保存</button>\r\n</div>\r\n<div class=\"row\" style=\"margin: 20px 0 -30px 0;height: inherit;\">\r\n\t<div class=\"col-6 \" *ngIf=\"edit\" id=\"textPanel\" style=\"margin-bottom: -40px;\">\r\n\t\t<textarea id=\"textArea\" class=\"form-control form-control-sm\" [style.height]=\"initHeight\" style=\"min-height: 200px;\"[(ngModel)]=\"rawData\" (input)=\"refreshHTML()\"></textarea>\r\n\t\t<button class=\"btn btn-outline-light\" (click)=\"expandTextArea()\">下降{{row}}行</button>  \r\n\t\t<button class=\"btn btn-outline-light\" (click)=\"reduceTextArea()\">上升{{row}}行</button>  \r\n\t\t<input class=\"form-control-plaintext\" style=\"display:inline-block;float:right;width: 40px;\" type=\"number\" max=\"99\" min=\"1\" [(ngModel)]=\"row\"/>\r\n\t</div>\r\n\t<div [class]=\"showDataClass +' showPanel'\" style=\"min-height: 200px;\"\r\n\t\t id=\"htmlPanel\" [innerHTML]=\"showData\">\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -936,6 +961,7 @@ module.exports = "<app-document-tree style=\"position: absolute;z-index:100;left
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_data_service__ = __webpack_require__("./src/app/service/data.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__service_document_service__ = __webpack_require__("./src/app/service/document.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__confirm_confirm_component__ = __webpack_require__("./src/app/confirm/confirm.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__refactor_file_dialog_refactor_file_dialog_component__ = __webpack_require__("./src/app/refactor-file-dialog/refactor-file-dialog.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -945,6 +971,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -963,6 +990,7 @@ var PersonalDocumentComponent = /** @class */ (function () {
         this.row = 5;
         this.rowHeight = 15;
         this.initHeight = "450px";
+        this.tempPath = "";
     }
     PersonalDocumentComponent.prototype.expandTextArea = function () {
         var height = this.row * this.rowHeight;
@@ -1092,7 +1120,26 @@ var PersonalDocumentComponent = /** @class */ (function () {
                 }
             }
             else {
-                return null;
+                continue;
+            }
+        }
+    };
+    PersonalDocumentComponent.prototype.getTreeNodeTextPath = function (id, nodes) {
+        for (var nd in nodes) {
+            if (nodes[nd]["id"] == id) {
+                return nodes[nd]["text"];
+            }
+            else if (nodes[nd]["children"] != null && nodes[nd]["children"].length > 0) {
+                var q = this.getTreeNodeTextPath(id, nodes[nd]["children"]);
+                if (q != null) {
+                    return nodes[nd]["text"] + '/' + q;
+                }
+                else {
+                    continue;
+                }
+            }
+            else {
+                continue;
             }
         }
     };
@@ -1177,6 +1224,27 @@ var PersonalDocumentComponent = /** @class */ (function () {
         });
     };
     ;
+    PersonalDocumentComponent.prototype.refactor = function (nd) {
+        var _this = this;
+        var id = this.dataService.user["id"];
+        var oldPath1 = this.getTreeNodeTextPath(nd['id'], this.nodes);
+        this.tempPath = '';
+        this.dialogService.addDialog(__WEBPACK_IMPORTED_MODULE_7__refactor_file_dialog_refactor_file_dialog_component__["a" /* RefactorFileDialogComponent */], {
+            title: '移动文件',
+            message: '移动文件',
+            nodes: this.nodes,
+            oldPath: oldPath1,
+            selectedNode: nd,
+            userId: id
+        }).subscribe(function (obj) {
+            if (obj != null) {
+                _this.freshTree();
+            }
+            else {
+                _this.showError("移动失败!");
+            }
+        });
+    };
     PersonalDocumentComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-personal-document',
@@ -1248,6 +1316,255 @@ var PersonalToolsComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/refactor-file-dialog/refactor-file-dialog.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/refactor-file-dialog/refactor-file-dialog.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"modal-dialog\">\n\t<div class=\"modal-content\">\n\t\t<div class=\"modal-header\">\n\t\t\t<h4 class=\"modal-title\">{{title}}</h4>\n\t\t\t<button type=\"button\" class=\"close\" (click)=\"close()\">&times;</button>\n\t\t</div>\n\t\t<div class=\"modal-body\">\n\t\t\t<label for=\"path\">{{message}}：</label>\n\t\t\t<input type=\"text\" id=\"path\" class=\"form-control\" disabled=\"disabled\" (keyup)=\"changePath($event)\" [(ngModel)]=\"oldPath\" style=\"margin-bottom: 5px;\" [placeholder]=\"oldPath\"/>\r\n\t\t\t<input type=\"text\" id=\"path\" class=\"form-control\" (keyup)=\"changePath($event)\" [(ngModel)]=\"newFilePath\" title=\"空或/为根目录，填null为删除\" placeholder=\"目标路径\" />\n\t\t\t<div *ngIf=\"selectedNodeBtns != null\">\n\t\t\t\t<div *ngFor=\"let nd of selectedNodeBtns.children\" class=\"btn-group\">\n\t\t\t\t\t<button class=\"btn btn-outline-info\" *ngIf=\"ifButtonShow(nd)\" (click)=\"addPath(nd)\">{{nd.text}}</button>&nbsp;\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<hr />\n\t\t</div>\n\t\t<div class=\"modal-footer\">\n\t\t\t<button type=\"button\" class=\"btn btn-primary\" (click)=\"ensure()\">确定</button>\n\t\t\t<button type=\"button\" class=\"btn btn-default\" (click)=\"close()\">取消</button>\n\t\t</div>\n\t</div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/refactor-file-dialog/refactor-file-dialog.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RefactorFileDialogComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ngx_bootstrap_modal__ = __webpack_require__("./node_modules/ngx-bootstrap-modal/bundles/ngx-bootstrap-modal.umd.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ngx_bootstrap_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ngx_bootstrap_modal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__domain_tree_node_tree_node__ = __webpack_require__("./src/app/domain/tree-node/tree-node.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__service_data_service__ = __webpack_require__("./src/app/service/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_document_service__ = __webpack_require__("./src/app/service/document.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var RefactorFileDialogComponent = /** @class */ (function (_super) {
+    __extends(RefactorFileDialogComponent, _super);
+    function RefactorFileDialogComponent(dialogService, dataService, documentService) {
+        var _this = _super.call(this, dialogService) || this;
+        _this.dataService = dataService;
+        _this.documentService = documentService;
+        _this.newFilePath = "";
+        return _this;
+    }
+    RefactorFileDialogComponent.prototype.ngOnInit = function () {
+        this.userId = this.dataService.user.id;
+        this.selectedNodeBtns = new __WEBPACK_IMPORTED_MODULE_2__domain_tree_node_tree_node__["a" /* TreeNode */]();
+        this.selectedNodeBtns.children = this.nodes;
+        this.allTypes = ["folder", "text"];
+    };
+    RefactorFileDialogComponent.prototype.changePath = function (event) {
+        var inputChar = event.keyCode || event.which;
+    };
+    RefactorFileDialogComponent.prototype.inputEnter = function (inputChar) {
+        return inputChar == 13;
+    };
+    RefactorFileDialogComponent.prototype.ifButtonShow = function (nd) {
+        return nd.type == this.allTypes[0];
+    };
+    RefactorFileDialogComponent.prototype.showError = function (msg) {
+        this.dialogService.show({
+            content: msg,
+            icon: 'error',
+            size: 'sm',
+            showCancelButton: false
+        });
+    };
+    RefactorFileDialogComponent.prototype.addPath = function (nd) {
+        this.newFilePath += nd['text'] + '/';
+        this.selectedNodeBtns = nd;
+    };
+    RefactorFileDialogComponent.prototype.ensure = function () {
+        var _this = this;
+        if (this.newFilePath.toLowerCase() == 'null') {
+            //向上close到personaldocument
+        }
+        else {
+            var r = /([\s\\]|\/{2,})/;
+            var tmp = this.newFilePath.split("/");
+            var maxLength = 42;
+            if (r.test(this.newFilePath)) {
+                this.showError("文件路径不能有空格,回车,Tab,\或连续/");
+            }
+            else if (tmp[tmp.length - 1].length > maxLength) {
+                this.showError("文件名不能超过" + maxLength + "个字符");
+            }
+            else {
+                this.pid = 0;
+                this.checkPath();
+                var op = this.oldPath.split("/");
+                var np = this.newFilePath.split("/");
+                var obj = {
+                    "path": this.pList,
+                    "ifRename": this.newFilePath.slice(this.newFilePath.length - 1) != '/' && (op[op.length - 1] != np[np.length - 1]),
+                    "userId": this.userId,
+                    "id": this.selectedNode.id,
+                    "type": this.selectedNode.type,
+                    "pid": this.pid,
+                    "oldName": op[op.length - 1]
+                };
+                var childPath = true;
+                if (np.length > op.length) {
+                    for (var a in op) {
+                        if (np[a] == null) {
+                            break;
+                        }
+                        if (op[a] != np[a]) {
+                            childPath = false;
+                            break;
+                        }
+                    }
+                    if (childPath) {
+                        this.showError("不能移到子路径");
+                        return;
+                    }
+                }
+                if (this.pList.length < 1 && obj["ifRename"]) {
+                    this.showError("文件已存在,是否末尾少加了`/`?");
+                    return;
+                }
+                if (this.pList.length > 1 || (this.pList.length == 1 && (!obj["ifRename"]))) {
+                    this.showError("该文件不存在,请新建该文件夹后再移动");
+                    return;
+                }
+                if ((this.oldPath == this.newFilePath && obj["ifRename"]) ||
+                    (op[op.length - 2] == np[np.length - 2] && !obj["ifRename"]) ||
+                    ((this.newFilePath == '' || this.newFilePath == '/') && op.length == 1)) {
+                    this.showError("文件路径没有改变");
+                    return;
+                }
+                this.documentService.refactorDoc(obj).subscribe(function (res) {
+                    _this.changeDocumentInDataService(obj);
+                    _this.close(res);
+                }, function (err) {
+                    _this.showError("服务认证错误,请稍后再试");
+                });
+            }
+        }
+    };
+    RefactorFileDialogComponent.prototype.changeDocumentInDataService = function (obj) {
+        var nodes = this.dataService.documents;
+        var old = this.findTreeNode(obj['id'], nodes);
+        var tmp;
+        for (var i in old) {
+            if (old[i]['id'] == obj['id']) {
+                tmp = old[i];
+                old.splice(i, 1);
+                break;
+            }
+        }
+        var aim = this.findTreeNode(obj['pid'], nodes);
+        for (var j in aim) {
+            if (aim[j]['id'] == obj['pid']) {
+                aim[j].children.push(tmp);
+            }
+        }
+    };
+    RefactorFileDialogComponent.prototype.findTreeNode = function (id, nodes) {
+        for (var nd in nodes) {
+            if (nodes[nd]["id"] == id) {
+                return nodes;
+            }
+            else if (nodes[nd]["children"] != null && nodes[nd]["children"].length > 0) {
+                var q = this.findTreeNode(id, nodes[nd]["children"]);
+                if (q != null) {
+                    return q;
+                }
+                else {
+                    continue;
+                }
+            }
+            else {
+                continue;
+            }
+        }
+    };
+    RefactorFileDialogComponent.prototype.checkPath = function () {
+        var pathList1 = this.newFilePath.split("/");
+        var pathList = [];
+        var nowPath1 = this.dataService.documents;
+        for (var a in pathList1) {
+            if (pathList1[a] != '' && pathList1[a] != '/') {
+                pathList.push(pathList1[a]);
+            }
+        }
+        var num = 0;
+        this.nowParent = this.dataService.documents;
+        for (var a in pathList) {
+            var ifFind = false;
+            if (nowPath1.length > 0) {
+                for (var cnowPath in nowPath1) {
+                    if (nowPath1[cnowPath]["text"] == pathList[a]) {
+                        ifFind = true;
+                        this.pid = nowPath1[cnowPath]["id"];
+                        if (nowPath1[cnowPath].children == null) {
+                            var t = [];
+                            nowPath1[cnowPath].children = t;
+                        }
+                        nowPath1 = nowPath1[cnowPath].children;
+                        this.nowParent = nowPath1;
+                        break;
+                    }
+                }
+            }
+            else {
+                break;
+            }
+            if (!ifFind) {
+                break;
+            }
+            else {
+                ++num;
+            }
+        }
+        if (num <= (pathList.length)) {
+            this.pList = pathList.slice(num);
+        }
+    };
+    RefactorFileDialogComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-refactor-file-dialog',
+            template: __webpack_require__("./src/app/refactor-file-dialog/refactor-file-dialog.component.html"),
+            styles: [__webpack_require__("./src/app/refactor-file-dialog/refactor-file-dialog.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ngx_bootstrap_modal__["DialogService"],
+            __WEBPACK_IMPORTED_MODULE_3__service_data_service__["a" /* DataService */],
+            __WEBPACK_IMPORTED_MODULE_4__service_document_service__["a" /* DocumentService */]])
+    ], RefactorFileDialogComponent);
+    return RefactorFileDialogComponent;
+}(__WEBPACK_IMPORTED_MODULE_1_ngx_bootstrap_modal__["DialogComponent"]));
+
+
+
+/***/ }),
+
 /***/ "./src/app/service/data.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1311,6 +1628,7 @@ var DocumentService = /** @class */ (function () {
         this.getDocUrl = "api/getDoc";
         this.saveDocUrl = "api/saveDoc";
         this.deleteDocUrl = "api/deleteDoc";
+        this.refactorDocUrl = 'api/refactorDoc';
     }
     DocumentService.prototype.getNode = function () {
     };
@@ -1325,6 +1643,9 @@ var DocumentService = /** @class */ (function () {
     };
     DocumentService.prototype.getDoc = function (obj) {
         return this.http.get(this.getDocUrl + "/" + obj);
+    };
+    DocumentService.prototype.refactorDoc = function (rawData) {
+        return this.http.post(this.refactorDocUrl, rawData);
     };
     DocumentService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
@@ -1583,14 +1904,14 @@ var SignUpDialogComponent = /** @class */ (function (_super) {
 /***/ "./src/app/tree-root/tree-root.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".tree-node{\r\n\tmargin-left: 1em;\r\n}\r\n\r\n.node-text{\r\n\twhite-space:nowrap;overflow: scroll;cursor: pointer;\r\n\tfont:13px futura;\r\n\ttransition: color 0.5s;\r\n\t-moz-transition: color 0.5s;\r\n\t-webkit-transition: color 0.5s;\r\n\t-o-transition:color 0.5s;\r\n\t -webkit-user-select:none; \r\n\t -moz-user-select:none; \r\n\t -ms-user-select:none; \r\n\t user-select:none;\r\n}\r\n\r\n.textBlue{\r\n\tcolor:lightblue;\r\n}\r\n\r\n.textWhite{\r\n\tcolor: white;\r\n}\r\n"
+module.exports = ".tree-node{\r\n\tmargin-left: 1em;\r\n}\r\n\r\n.node-text{\r\n\twhite-space:nowrap;overflow: scroll;cursor: pointer;\r\n\tfont:13px futura;\r\n\tmargin-right: 30px;\r\n\ttransition: color 0.5s;\r\n\toverflow: hidden;\r\n\t-moz-transition: color 0.5s;\r\n\t-webkit-transition: color 0.5s;\r\n\t-o-transition:color 0.5s;\r\n\t -webkit-user-select:none; \r\n\t -moz-user-select:none; \r\n\t -ms-user-select:none; \r\n\t user-select:none;\r\n}\r\n\r\n.textBlue{\r\n\tcolor:lightblue;\r\n}\r\n\r\n.textWhite{\r\n\tcolor: white;\r\n}\r\n\r\n.mv{\r\n\tdisplay: inline-block;\r\n\tfont-size: 11px;\r\n\theight: 15px;\r\n\tpadding: 0px;\r\n\tmargin-top: -17px;\r\n\tposition: absolute;\r\n\tright:0px;\r\n}\r\n"
 
 /***/ }),
 
 /***/ "./src/app/tree-root/tree-root.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let node of nodes\" id=\"node.id\" class=\"tree-node\" >\r\n\t<div style=\"display: inline-block;\" *ngIf=\"!node.deleted\">\r\n\t\t<span class=\"node-text\" [style.color]=\"colorDependOnType(node.type)\"\r\n\t\t\t(dblclick)=\"changeSelectedNode(node)\" (keyup)=\"changeName(node)\">\r\n\t\t\t> {{node.text}}\r\n\t\t</span>\r\n\t</div>\r\n\t<div *ngIf=\"isNotLast(node) && node.showChildren\">\r\n\t\t<app-tree-root  [nodes]=\"node.children\" (select)=\"selectc($event)\" [depth]=\"depth + 1\"></app-tree-root>\r\n\t</div>\r\n</div>"
+module.exports = "<div *ngFor=\"let node of nodes\" id=\"node.id\" class=\"tree-node\" >\r\n\t<div style=\"display: inline-block;\" *ngIf=\"!node.deleted\">\r\n\t\t<span [style.color]=\"colorDependOnType(node.type)\" style=\"display: inline;\">\r\n\t\t\t<div (dblclick)=\"changeSelectedNode(node)\" class=\"node-text\">\n\t\t\t\t> {{node.text}}\n\t\t\t</div>\r\n\t\t\t<button class=\"btn btn-dark mv\" (click)=\"crefactor(node)\">\n\t\t\t\tmv\n\t\t\t</button>\r\n\t\t</span>\r\n\t</div>\r\n\t<div *ngIf=\"isNotLast(node) && node.showChildren\">\r\n\t\t<app-tree-root  [nodes]=\"node.children\" (select)=\"selectc($event)\" (refactor)= \"childRefactor($event)\" [depth]=\"depth + 1\"></app-tree-root>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -1614,11 +1935,15 @@ var TreeRootComponent = /** @class */ (function () {
     function TreeRootComponent() {
         this.depth = 0;
         this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.refactor = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.childNd = null;
     }
     TreeRootComponent.prototype.ngOnInit = function () {
     };
     TreeRootComponent.prototype.isNotLast = function (nd) {
         return nd.children != null && nd.children.length > 0;
+    };
+    TreeRootComponent.prototype.isNotFirst = function (nd) {
     };
     TreeRootComponent.prototype.changeSelectedNode = function (nd) {
         if (!this.isNotLast(nd)) {
@@ -1631,10 +1956,8 @@ var TreeRootComponent = /** @class */ (function () {
     TreeRootComponent.prototype.selectc = function (nd, type) {
         this.select.emit(nd);
     };
-    TreeRootComponent.prototype.rename = function (node) {
-        console.log(node);
-    };
-    TreeRootComponent.prototype.changeName = function (node) {
+    TreeRootComponent.prototype.crefactor = function (nd) {
+        this.refactor.emit(nd);
     };
     TreeRootComponent.prototype.colorDependOnType = function (tp) {
         var specialStyle = "";
@@ -1645,6 +1968,17 @@ var TreeRootComponent = /** @class */ (function () {
             specialStyle = "white";
         }
         return specialStyle;
+    };
+    TreeRootComponent.prototype.childRefactor = function (node) {
+        this.refactor.emit(node);
+    };
+    TreeRootComponent.prototype.getNum = function (nd) {
+        if (nd.children == null || nd.children.length < 1) {
+            return 'empty';
+        }
+        else {
+            return nd.children.length + ' files';
+        }
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
@@ -1658,6 +1992,10 @@ var TreeRootComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
         __metadata("design:type", Object)
     ], TreeRootComponent.prototype, "select", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+        __metadata("design:type", Object)
+    ], TreeRootComponent.prototype, "refactor", void 0);
     TreeRootComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-tree-root',

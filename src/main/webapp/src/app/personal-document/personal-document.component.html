@@ -1,4 +1,4 @@
-<app-document-tree style="position: absolute;z-index:100;left: 0;top: 0;" [nodes]="nodes" (selectc)="select($event)">
+<app-document-tree style="position: absolute;z-index:100;left: 0;top: 0;" [nodes]="nodes" (selectc)="select($event)" (refactor)="refactor($event)">
 </app-document-tree>
 <div class="btn-group" style="position: absolute;height:30px;right: 15px;top: 0px;">
 	<button class="btn btn-outline-secondary" style="font-size: 12px;border-radius: 0 ;" (click)="editDoc()">编辑</button>
@@ -16,5 +16,4 @@
 	<div [class]="showDataClass +' showPanel'" style="min-height: 200px;"
 		 id="htmlPanel" [innerHTML]="showData">
 	</div>
-	
 </div>

@@ -13,7 +13,6 @@ import site.qizhuang.web.domain.Document;
 import site.qizhuang.web.dto.BasicDto;
 import site.qizhuang.web.dto.FileDto;
 import site.qizhuang.web.dto.SaveNewFileDto;
-
 import javax.transaction.Transactional;
 import java.util.*;
 
@@ -100,17 +99,19 @@ public class DocumentService {
             return new BasicDto("删除失败了");
     }
 
-    public static Set<Document> findRootDocumentsFromAll(Set<Document> documents){
-        Set<Document> rootDocuments = new HashSet<>();
-        try {
-            for (Document d:documents) {
-                if(d.isRoot()){
-                    rootDocuments.add(d);
-                }
-            }
-        }catch (Exception e){
-            log.warn(e);
+    public void changePid(long id, long pid) {
+        if(pid == 0){
+            this.documentRepository.setPidAndRoot(id);
+        }else {
+            this.documentRepository.setPid(id,pid);
         }
-        return rootDocuments;
+    }
+
+    public void changeNameAndPid(long id, long pid, String s) {
+        if(pid == 0){
+            this.documentRepository.setPidAndRootAndText(id,s);
+        }else {
+            this.documentRepository.setPidAndText(id,pid,s);
+        }
     }
 }

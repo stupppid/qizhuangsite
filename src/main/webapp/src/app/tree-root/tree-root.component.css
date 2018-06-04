@@ -5,7 +5,9 @@
 .node-text{
 	white-space:nowrap;overflow: scroll;cursor: pointer;
 	font:13px futura;
+	margin-right: 30px;
 	transition: color 0.5s;
+	overflow: hidden;
 	-moz-transition: color 0.5s;
 	-webkit-transition: color 0.5s;
 	-o-transition:color 0.5s;
@@ -21,4 +23,14 @@
 
 .textWhite{
 	color: white;
+}
+
+.mv{
+	display: inline-block;
+	font-size: 11px;
+	height: 15px;
+	padding: 0px;
+	margin-top: -17px;
+	position: absolute;
+	right:0px;
 }

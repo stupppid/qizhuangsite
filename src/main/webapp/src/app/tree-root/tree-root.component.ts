@@ -12,6 +12,8 @@ export class TreeRootComponent implements OnInit {
 	@Input() nodes: TreeNode[];
 	@Input() depth: Number = 0;
 	@Output() select = new EventEmitter < TreeNode > ();
+	@Output() refactor = new EventEmitter < TreeNode >();
+	childNd:TreeNode = null;
 
 	constructor() {}
 
@@ -20,6 +22,10 @@ export class TreeRootComponent implements OnInit {
 
 	isNotLast(nd) {
 		return nd.children != null && nd.children.length > 0;
+	}
+	
+	isNotFirst(nd){
+		
 	}
 
 	changeSelectedNode(nd: TreeNode) {
@@ -34,12 +40,10 @@ export class TreeRootComponent implements OnInit {
 		this.select.emit(nd);
 	}
 
-	rename(node) {
-		console.log(node)
+	crefactor(nd: TreeNode) {
+		this.refactor.emit(nd);
 	}
-	changeName(node) {
-		
-	}
+	
 	colorDependOnType(tp:string){
 		var specialStyle = "";
 		if(tp == "folder"){
@@ -48,5 +52,17 @@ export class TreeRootComponent implements OnInit {
 			specialStyle = "white";
 		}
 		return specialStyle;
+	}
+	
+	childRefactor(node:TreeNode){
+		this.refactor.emit(node);
+	}
+	
+	getNum(nd:TreeNode){
+		if(nd.children == null || nd.children.length < 1){
+			return 'empty';
+		}else{
+			return nd.children.length + ' files';
+		}
 	}
 }

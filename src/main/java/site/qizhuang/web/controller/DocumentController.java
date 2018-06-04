@@ -1,5 +1,7 @@
 package site.qizhuang.web.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import site.qizhuang.web.config.DocumentType;
@@ -8,6 +10,7 @@ import site.qizhuang.web.domain.MongoDocument;
 import site.qizhuang.web.domain.User;
 import site.qizhuang.web.dto.BasicDto;
 import site.qizhuang.web.dto.FileDto;
+import site.qizhuang.web.dto.RefactorDocDto;
 import site.qizhuang.web.dto.SaveNewFileDto;
 import site.qizhuang.web.service.DocumentService;
 
@@ -18,6 +21,9 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api")
 public class DocumentController {
+
+    private static Logger logger = LoggerFactory.getLogger(DocumentController.class);
+
     @Autowired
     private DocumentService documentService;
 
@@ -74,6 +80,18 @@ public class DocumentController {
         }
         rootDocument.setRoot(fileDto.getPid() == 0);
         return this.documentService.saveNewFile(rootDocument,fileDto);
+    }
+
+    @PostMapping("/refactorDoc")
+    public BasicDto refactorDoc(@RequestBody RefactorDocDto rawData){
+        if(rawData.isIfRename()){
+            if(rawData.getPath() != null && rawData.getPath().length > 0){
+                documentService.changeNameAndPid(rawData.getId(),rawData.getPid(),rawData.getPath()[0]);
+            }
+        }else {
+            documentService.changePid(rawData.getId(),rawData.getPid());
+        }
+        return new BasicDto();
     }
 
 }

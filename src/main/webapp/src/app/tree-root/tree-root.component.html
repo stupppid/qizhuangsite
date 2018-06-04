@@ -1,11 +1,15 @@
 <div *ngFor="let node of nodes" id="node.id" class="tree-node" >
 	<div style="display: inline-block;" *ngIf="!node.deleted">
-		<span class="node-text" [style.color]="colorDependOnType(node.type)"
-			(dblclick)="changeSelectedNode(node)" (keyup)="changeName(node)">
-			> {{node.text}}
+		<span [style.color]="colorDependOnType(node.type)" style="display: inline;">
+			<div (dblclick)="changeSelectedNode(node)" class="node-text">
+				> {{node.text}}
+			</div>
+			<button class="btn btn-dark mv" (click)="crefactor(node)">
+				mv
+			</button>
 		</span>
 	</div>
 	<div *ngIf="isNotLast(node) && node.showChildren">
-		<app-tree-root  [nodes]="node.children" (select)="selectc($event)" [depth]="depth + 1"></app-tree-root>
+		<app-tree-root  [nodes]="node.children" (select)="selectc($event)" (refactor)= "childRefactor($event)" [depth]="depth + 1"></app-tree-root>
 	</div>
 </div>

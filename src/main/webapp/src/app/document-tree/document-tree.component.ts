@@ -12,6 +12,7 @@ export class DocumentTreeComponent implements OnInit {
 
 	ifDocumentTreeHide : Boolean = true;
 	@Output() selectc = new EventEmitter<TreeNode>();
+	@Output() refactor = new EventEmitter<TreeNode>();
 	@Input() nodes : TreeNode[];
 	hideString:String = "隐藏";
 	showString:String = "资源管理器";
@@ -38,4 +39,7 @@ export class DocumentTreeComponent implements OnInit {
 		this.selectc.emit(nd);
 	}
 	
+	crefactor(nd:TreeNode){
+		this.refactor.emit(nd);
+	}
 }
