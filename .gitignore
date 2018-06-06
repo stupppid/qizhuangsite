@@ -4,7 +4,7 @@ target
 *.class
 
 .idea
-qizhuangsite.iml
+*.iml
 
 src/main/webapp/node_modules
 src/main/webapp/src/assets
