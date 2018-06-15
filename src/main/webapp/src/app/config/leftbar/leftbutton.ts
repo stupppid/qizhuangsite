@@ -9,6 +9,7 @@ export const leftbutton:any = {
 			"title":"我的主页",
 			"ifShow" : true,
 			"ifActive" : true,
+			"ifUserNeed" : false,
 			"unActiveAlert" : "维护中",
 			"subButton":[],
 			"href":"#"
@@ -17,35 +18,39 @@ export const leftbutton:any = {
 			"id":"document",
 			"title":"我的文档",
 			"ifShow" : true,
+			"ifUserNeed" : false,
 			"ifActive" : true,
+			"href":"#",
 			"subButton":[
 				{
 					"id":"persopnalDocument",
 					"title":"个人文档",
 					"ifShow" : true,
+					"ifUserNeed" : true,
 					"ifActive" : true,
 					"subButton":[],
 					"href":"personalDocument"
 				}
-			],
-			"href":"#"
+			]
 		},
 		{
 			"id":"tool",
 			"title":"我的工具",
 			"ifShow" : true,
+			"ifUserNeed" : false,
 			"ifActive" : true,
+			"href":"personalTools",
 			"subButton":[
 				{
-					"id":"date",
-					"title":"财经日历",
+					"id":"data",
+					"title":"交易数据",
 					"ifShow" : true,
+					"ifUserNeed" : true,
 					"ifActive" : true,
 					"subButton":[],
-					"href":"personalTools"
+					"href":"personalTools/traderData"
 				}
-			],
-			"href":"#"
+			]
 		}
 	]
 }

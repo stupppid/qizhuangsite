@@ -4,10 +4,11 @@ target
 *.class
 
 .idea
-qizhuangsite.iml
+*.iml
 
 src/main/webapp/node_modules
 src/main/webapp/src/assets
 src/main/java/site/qizhuang/web/test
 src/main/webapp/bower_components
 src/main/webapp/dist
+src/main/resources/static

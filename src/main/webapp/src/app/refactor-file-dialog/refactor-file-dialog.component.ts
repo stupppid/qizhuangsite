@@ -57,7 +57,7 @@ export class RefactorFileDialogComponent extends DialogComponent < refactorFileM
 		}
 
 		ifButtonShow(nd: TreeNode) {
-			return nd.type == this.allTypes[0];
+			return nd.type == this.allTypes[0] && !nd.deleted;
 		}
 
 		showError(msg: string) {
@@ -76,7 +76,12 @@ export class RefactorFileDialogComponent extends DialogComponent < refactorFileM
 		
 		ensure(){
 			if(this.newFilePath.toLowerCase() == 'null' ){
-				//向上close到personaldocument
+				this.documentService.deleteDoc(this.selectedNode.id).subscribe(res=>{
+					this.deleteDocumentInDataService(this.selectedNode.id);
+					this.close(res);
+				},err=>{
+					this.showError("服务认证错误,请稍后再试");
+				})
 			}else{
 				var r = /([\s\\]|\/{2,})/;
 				var tmp = this.newFilePath.split("/");
@@ -142,6 +147,25 @@ export class RefactorFileDialogComponent extends DialogComponent < refactorFileM
 			}
 		}
 		
+		setDeleted(old){
+			if(old.children!=null && old.children.length > 0){
+				for(let i in old.children){
+					this.setDeleted(old.children[i]);
+				}
+			}
+			old.deleted = true;
+		}
+		
+		deleteDocumentInDataService(id){
+			var old = this.findTreeNode(id,this.nodes);
+			for(let i in old){
+				if(old[i]['id'] == id){
+					this.setDeleted(old[i]);
+					break;
+				}
+			}
+		}
+		
 		changeDocumentInDataService(obj){
 			var nodes = this.dataService.documents;
 			var old = this.findTreeNode(obj['id'],nodes);
@@ -153,10 +177,21 @@ export class RefactorFileDialogComponent extends DialogComponent < refactorFileM
 					break;
 				}
 			}
-			var aim = this.findTreeNode(obj['pid'],nodes);
-			for(let j in aim){
-				if(aim[j]['id'] == obj['pid']){
-					aim[j].children.push(tmp)
+			var isRoot = false;
+			for(let a in nodes){
+				if(nodes[a]['id'] == obj['pid']){
+					isRoot = true;
+					break;
+				}
+			}
+			if(obj['pid'] == 0){
+				nodes.push(tmp);
+			}else{
+				var aim = this.findTreeNode(obj['pid'],nodes);
+				for(let j in aim){
+					if(aim[j]['id'] == obj['pid']){
+						aim[j].children.push(tmp);
+					}
 				}
 			}
 		}

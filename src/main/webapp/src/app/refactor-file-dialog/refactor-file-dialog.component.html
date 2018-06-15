@@ -7,7 +7,7 @@
 		<div class="modal-body">
 			<label for="path">{{message}}：</label>
 			<input type="text" id="path" class="form-control" disabled="disabled" (keyup)="changePath($event)" [(ngModel)]="oldPath" style="margin-bottom: 5px;" [placeholder]="oldPath"/>
-			<input type="text" id="path" class="form-control" (keyup)="changePath($event)" [(ngModel)]="newFilePath" title="空或/为根目录，填null为删除" placeholder="目标路径" />
+			<input type="text" id="path" class="form-control" (keyup)="changePath($event)" [(ngModel)]="newFilePath" title="填写/为根目录，null为删除" placeholder="目标路径" />
 			<div *ngIf="selectedNodeBtns != null">
 				<div *ngFor="let nd of selectedNodeBtns.children" class="btn-group">
 					<button class="btn btn-outline-info" *ngIf="ifButtonShow(nd)" (click)="addPath(nd)">{{nd.text}}</button>&nbsp;

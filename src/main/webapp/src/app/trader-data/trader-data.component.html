@@ -1,0 +1,71 @@
+<div class="dataPanel">
+	<input type="text" [(ngModel)] = "searchedSymbol" 
+				(input)="findTheSymbolInList($event)"
+				style="width: 223px" 
+				placeholder="输入品种名搜索，如EURUSD"/>
+	<div style="overflow-y: scroll;height: calc(100% - 27px);">
+		<table cellpadding="8px" >
+			<tr *ngFor="let a of asks;index as i" style="font:normal bolder 12px arial;">
+				<td class="btn-light td" id="{{a['s']}}" 
+					style="cursor: pointer;" [style.backgroundColor]="differColor(i)"
+					(click)="selectSymbol(a)">
+					{{a['s']}}
+				</td>
+				<td class="btn-light td" [style.backgroundColor]="differColor(i)">{{a['a']}}</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div style="margin-left: 190px;margin-top: -24px;">
+	<div style="float: left;width:76%">
+		<div style="height: 400px;background-color: lightgray;">
+			KLINE
+		</div>
+		<div style="margin-left:5px;border-right: #343A40 solid 1px;">
+			<div>
+				<div class="btn-group" #dropdown="bs-dropdown" dropdown>
+					<button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
+	        		交易系统<span class="caret"></span>
+	      			</button> &nbsp;&nbsp;&nbsp;
+					<ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+						<!--<li *ngFor="let t of allTypes" role="menuitem">
+							<button class="dropdown-item" (click)="dropdown.hide();type=t;">{{t}}</button>
+						</li>-->
+						<li role="menuitem">
+							<button class="dropdown-item" (click)="dropdown.hide()">均线系统</button>
+						</li>
+						<li role="menuitem">
+							<button class="dropdown-item" (click)="dropdown.hide()">波浪理论</button>
+						</li>
+					</ul>
+				</div>
+				<button class="btn btn-outline-secondary" (click)="createNewSystemDialog()">创建新的交易系统</button>
+			</div>
+			<hr />
+			<div>
+				<form class="form-inline">
+					<div style="margin: 5px;">
+						<label style="height: 30px;margin: 0 5px 0 5px;float: left;" for="pz">品种</label>
+						<input style="height: 30px;margin: 0 5px 0 5px;" type="text" class="form-control" id="pz">
+					</div>
+					<div style="margin: 5px;">
+						<label style="height: 30px;margin: 0 5px 0 5px;float: left;" for="jg" >价格</label>
+						<input style="height: 30px;margin: 0 5px 0 5px;" type="text" class="form-control" id="jg">
+					</div>
+				</form>
+			</div>
+			
+		</div>
+	</div>
+	<div style="float: left;width: 24%" >
+		<textarea [(ngModel)]="ruleText" disabled="disabled" style="width: 100%;height: 400px;"></textarea> 
+		<div style="padding:5px;background-color: lightgray;">
+			<button class="btn btn-primary" (click)="createNewSystemDialog()">查看所有订单</button><br />
+			<ul>
+				<li>buy eurusd  11.5  11.6</li>
+			</ul>
+			
+		</div>
+	</div>
+</div>
+

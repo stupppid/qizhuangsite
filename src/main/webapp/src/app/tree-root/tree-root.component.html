@@ -1,7 +1,7 @@
 <div *ngFor="let node of nodes" id="node.id" class="tree-node" >
 	<div style="display: inline-block;" *ngIf="!node.deleted">
 		<span [style.color]="colorDependOnType(node.type)" style="display: inline;">
-			<div (dblclick)="changeSelectedNode(node)" class="node-text">
+			<div (click)="changeSelectedNode(node)" class="node-text">
 				> {{node.text}}
 			</div>
 			<button class="btn btn-dark mv" (click)="crefactor(node)">
