@@ -23,6 +23,7 @@ import { RefactorFileDialogComponent } from './refactor-file-dialog/refactor-fil
 import { DocumentService } from './service/document.service';
 import { UserService } from './service/user.service';
 import { DataService } from './service/data.service';
+import { TraderDataComponent } from './trader-data/trader-data.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { DataService } from './service/data.service';
     NewFileDialogComponent,
     SignUpDialogComponent,
     ConfirmComponent,
-    RefactorFileDialogComponent
+    RefactorFileDialogComponent,
+    TraderDataComponent
   ],
   imports: [
     BrowserModule,

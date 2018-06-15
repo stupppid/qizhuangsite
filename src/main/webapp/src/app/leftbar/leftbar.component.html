@@ -9,13 +9,13 @@
 		<div *ngFor="let button of buttons" class="btn-group-vertical">
 			<button *ngIf="button.ifShow" class="btn btn-primary" 
 				style="border-radius: 0;border-bottom:solid black 1px;" 
-				(click)="goHref(button)">
+				(click)="goHref(button,false)">
 				{{button.title}}
 			</button>
 			<div id="{{button.id}}" *ngIf="button.ifShow" class="btn-group-vertical" style="width: 100%;">
 				<div style="border-radius: 0;border-bottom:solid black 1px;width: 100%;" 
 					*ngFor="let subbutton of button.subButton" 
-					(click)="goHref(subbutton)">
+					(click)="goHref(subbutton,true)">
 					<button class="btn btn-secondary" 
 						*ngIf="subbutton.ifShow"
 						id="{{subbutton.id}}" >

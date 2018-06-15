@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { PersonalDocumentComponent } from './personal-document/personal-document.component';
 import { PersonalToolsComponent } from './personal-tools/personal-tools.component';
+import { TraderDataComponent } from './trader-data/trader-data.component';
 
 const routes: Routes = [
   	{ path: 'personalTools', component: PersonalToolsComponent, children:[
-  		{ path: 'personalTools', component: PersonalToolsComponent },
+  		{ path: 'traderData', component: TraderDataComponent },
   	]},
 	{ path: 'personalDocument', component: PersonalDocumentComponent },
 	{ path: '', redirectTo: '/', pathMatch: 'full' },

@@ -14,6 +14,6 @@ export class DataService {
 	
 	clear(){
 		this.documents = [];
-		this.user = {};
+		this.user = {"id":0};
 	}
 }

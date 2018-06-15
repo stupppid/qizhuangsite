@@ -13,7 +13,6 @@ export interface newFileModel {
 	nodes: TreeNode[];
 	newFilePath: string;
 	userId: number;
-
 }
 
 @Component({
@@ -77,7 +76,7 @@ export class NewFileDialogComponent extends DialogComponent < newFileModel, null
 		}
 		
 		ifButtonShow(nd:TreeNode){
-			return nd.type==this.allTypes[0];
+			return nd.type==this.allTypes[0] && !nd.deleted;
 		}
 
 		showError(msg: string) {

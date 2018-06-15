@@ -1,0 +1,97 @@
+package site.qizhuang.document.controller;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import site.qizhuang.document.config.DocumentType;
+import site.qizhuang.document.domain.Document;
+import site.qizhuang.document.domain.MongoDocument;
+import site.qizhuang.document.domain.User;
+import site.qizhuang.document.dto.BasicDto;
+import site.qizhuang.document.dto.FileDto;
+import site.qizhuang.document.dto.RefactorDocDto;
+import site.qizhuang.document.dto.SaveNewFileDto;
+import site.qizhuang.document.service.DocumentService;
+
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+@RestController
+@RequestMapping("/api")
+public class DocumentController {
+
+    private static Logger logger = LoggerFactory.getLogger(DocumentController.class);
+
+    @Autowired
+    private DocumentService documentService;
+
+    @GetMapping("/getDoc/{objectId}")
+    public MongoDocument getDoc(@PathVariable String objectId){
+        return this.documentService.getDoc(objectId);
+    }
+
+    @DeleteMapping("/deleteDoc/{id}")
+    public BasicDto deleteDoc(@PathVariable Long id){
+        return this.documentService.deleteDoc(id);
+    }
+
+    @PostMapping("/saveDoc/{objectId}")
+    public BasicDto saveDoc(@PathVariable String objectId,@RequestBody String content){
+        MongoDocument mongoDocument = new MongoDocument();
+        mongoDocument.setId(objectId);
+        mongoDocument.setContent(content);
+        return this.documentService.saveDoc(mongoDocument);
+    }
+
+    @PostMapping("/createNewFile")
+    public SaveNewFileDto createNewFile(@RequestBody FileDto fileDto){
+        Document document = new Document();
+        Document lastDocument = document;
+        Document rootDocument = document;
+        Date date = new Date();
+        int len = fileDto.getPath().length;
+        User u = new User();
+        u.setId(fileDto.getUserId());
+        Set<User> us = new HashSet<User>();
+        us.add(u);
+        for (int i = 0;i<len;i++) {
+            Set<Document> documentSet = new HashSet<Document>();
+            documentSet.add(document);
+            document.setText(fileDto.getPath()[i]);
+            document.setUserSet(us);
+            document.setCreateTime(date);
+            document.setChangeTime(date);
+            document.setType(DocumentType.FOLDER);
+            if(i == (len - 1)){
+                document.setType(fileDto.getType());
+                if(!fileDto.getType().equals(DocumentType.FOLDER)){
+                    document.setText(fileDto.getTitle());
+                    document.setProfile(fileDto.getProfile());
+                }
+            }
+            if(i != 0){
+                lastDocument.setChildren(documentSet);
+                document.setRoot(false);
+                lastDocument = document;
+            }
+            document = new Document();
+        }
+        rootDocument.setRoot(fileDto.getPid() == 0);
+        return this.documentService.saveNewFile(rootDocument,fileDto);
+    }
+
+    @PostMapping("/refactorDoc")
+    public BasicDto refactorDoc(@RequestBody RefactorDocDto rawData){
+        if(rawData.isIfRename()){
+            if(rawData.getPath() != null && rawData.getPath().length > 0){
+                documentService.changeNameAndPid(rawData.getId(),rawData.getPid(),rawData.getPath()[0]);
+            }
+        }else {
+            documentService.changePid(rawData.getId(),rawData.getPid());
+        }
+        return new BasicDto();
+    }
+
+}

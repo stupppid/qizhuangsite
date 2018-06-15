@@ -28,8 +28,6 @@ export class AppComponent {
   }
   
   logOutInit(obj:any){
-  	this.user = {};
-  	this.documents = [];
   	this.ifSignIn = false;
   	this.dataService.clear();
   	location.href = "";

@@ -1,0 +1,23 @@
+td{
+	width: 100px;
+	display: inline-block;
+	overflow: hidden;
+	margin-bottom: 2px;
+	background-color: #F3F1F0;
+}
+
+tr{
+	font:normal bolder 12pt arial;
+}
+
+.dataPanel{
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 223px;
+	padding:0 2px 2px 0;
+	border-bottom-right-radius: 2px;
+	background-color: lightblue;
+	border-right: #343A40 solid 1px;
+}
