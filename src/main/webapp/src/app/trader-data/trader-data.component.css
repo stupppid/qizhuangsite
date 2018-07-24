@@ -1,15 +1,3 @@
-td{
-	width: 100px;
-	display: inline-block;
-	overflow: hidden;
-	margin-bottom: 2px;
-	background-color: #F3F1F0;
-}
-
-tr{
-	font:normal bolder 12pt arial;
-}
-
 .dataPanel{
 	position: absolute;
 	left: 0;
@@ -20,4 +8,8 @@ tr{
 	border-bottom-right-radius: 2px;
 	background-color: lightblue;
 	border-right: #343A40 solid 1px;
+}
+
+.leftSpace{
+	left: 15px;
 }

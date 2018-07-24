@@ -52,7 +52,7 @@ public class HandleDataService {
 
     @OnError
     public void onError(Throwable t) {
-        logger.info(session.getId() + t.getMessage());
+        logger.info(session.getId() + t.toString());
     }
 
     @OnMessage

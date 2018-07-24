@@ -1,23 +1,9 @@
-<div class="dataPanel">
-	<input type="text" [(ngModel)] = "searchedSymbol" 
-				(input)="findTheSymbolInList($event)"
-				style="width: 223px" 
-				placeholder="输入品种名搜索，如EURUSD"/>
-	<div style="overflow-y: scroll;height: calc(100% - 27px);">
-		<table cellpadding="8px" >
-			<tr *ngFor="let a of asks;index as i" style="font:normal bolder 12px arial;">
-				<td class="btn-light td" id="{{a['s']}}" 
-					style="cursor: pointer;" [style.backgroundColor]="differColor(i)"
-					(click)="selectSymbol(a)">
-					{{a['s']}}
-				</td>
-				<td class="btn-light td" [style.backgroundColor]="differColor(i)">{{a['a']}}</td>
-			</tr>
-		</table>
+<div class="row">
+	<div class="col-xs-12 col-sm-3 leftSpace">
+		<app-trader-data-now (selects)="selectSymbol($event)"></app-trader-data-now>
 	</div>
-</div>
-<div style="margin-left: 190px;margin-top: -24px;">
-	<div style="float: left;width:76%">
+	<div class="col-xs-12 col-sm-9 row">
+	<div class="col-xs-12 col-sm-9 leftSpace">
 		<div style="height: 400px;background-color: lightgray;">
 			KLINE
 		</div>
@@ -56,16 +42,17 @@
 			</div>
 			
 		</div>
-	</div>
-	<div style="float: left;width: 24%" >
+	</div >
+	<div class="col-xs-12 col-sm-3 leftSpace" >
 		<textarea [(ngModel)]="ruleText" disabled="disabled" style="width: 100%;height: 400px;"></textarea> 
 		<div style="padding:5px;background-color: lightgray;">
 			<button class="btn btn-primary" (click)="createNewSystemDialog()">查看所有订单</button><br />
 			<ul>
 				<li>buy eurusd  11.5  11.6</li>
 			</ul>
-			
 		</div>
 	</div>
+</div>
+
 </div>
 

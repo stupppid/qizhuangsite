@@ -30,6 +30,7 @@ public class MT4SocketDataService extends Thread{
             String string = null;
             try {
                 string = this.bf.readLine();
+                logger.info(string);
             } catch (Exception e) {
                 e.printStackTrace();
             }

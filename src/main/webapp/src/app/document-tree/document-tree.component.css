@@ -9,6 +9,7 @@
 
 .document-background{
 	top: -100px;
+	margin-left: 33px;
 	width: calc(100% + 10px);
 	max-width: 400px;
 	min-width: 100px;

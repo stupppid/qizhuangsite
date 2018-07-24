@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  websocketIp: "118.25.75.240"
 };

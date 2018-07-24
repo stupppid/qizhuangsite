@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { Button } from '../domain/leftbutton/button';
 import { DataService } from '../service/data.service';
@@ -16,24 +17,29 @@ export class LeftbarComponent implements OnInit {
 	
 	buttons : Button[];
 	private lastButton : String;
+	private checkUser : Boolean;
 	
   constructor( private router:Router ,
   	private dataService:DataService,
   	private dialogService:DialogService) {
   	this.buttons = leftbutton.leftbutton.buttons;
+  	this.checkUser = true;
+  }
+
+  ngOnInit() {
+  	if(environment.production == false){
+  		this.checkUser = false;
+  	}
   	let btnTemp = this.buttons;
   	$(document).ready(function(){
   		btnTemp.forEach(function(item,index){
 	  		$("#" + item.id).hide();
-	  	})
+	  	});
   	});
-  }
-
-  ngOnInit() {
   }
   
   goHref(btn : Button,ifSub:boolean){
-  	if(btn.ifUserNeed){
+  	if(btn.ifUserNeed && this.checkUser){
   		if(this.dataService.user.id == 0){
   			this.showError("请先登录!");
   			return;

@@ -24,6 +24,7 @@ import { DocumentService } from './service/document.service';
 import { UserService } from './service/user.service';
 import { DataService } from './service/data.service';
 import { TraderDataComponent } from './trader-data/trader-data.component';
+import { TraderDataNowComponent } from './trader-data-now/trader-data-now.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { TraderDataComponent } from './trader-data/trader-data.component';
     SignUpDialogComponent,
     ConfirmComponent,
     RefactorFileDialogComponent,
-    TraderDataComponent
+    TraderDataComponent,
+    TraderDataNowComponent
   ],
   imports: [
     BrowserModule,
